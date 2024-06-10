@@ -1,0 +1,76 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > جزوه ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW PUBLISHERS -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_publishers }} جزوه</h4>
+                            <p>مشاهده تمام جزوه ها</p>
+                        </div>
+                        <li class="far fa-globe publishers-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION PUBLISHERS -->
+            <section class="section-content">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="publishers-title">جزوه ها</h3>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li>عنوان رشته، جزوه</li>
+                            <li>لینک فایل</li>
+                            <li>تاریخ ثبت</li>
+                            <li></li>
+                        </div>
+                        {% if cursor_publishers_show | length >= 1 %}
+                            {% for publisher in cursor_publishers_show %}
+                                <div class="table-body table-body-users">
+                                    <li>{{publisher[0]}}</li>
+                                    <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[1]}}</a></li>
+                                    <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[2]}}</a></li>
+                                    <li>{{publisher[3]}}</li>
+
+                                    <form action="/delete_publisher/{{publisher[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

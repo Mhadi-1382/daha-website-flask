@@ -1,0 +1,127 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید مهارت های خود را ثبت و به عنوان کارجو منتظر کار مناسب خود باشید و همچنین اگر صاحب شغل هستید می توانید از شغل خود تبلیغ کنید.{% endblock des %}
+{% block key %}داها، فن آور، فن آور داها{% endblock key %}
+{% block title %}فن آور - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- TECHNOLOGIST -->
+                <div class="technologist">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید مهارت های خود را ثبت و به عنوان کارجو منتظر کار مناسب خود باشید و همچنین اگر صاحب شغل هستید می توانید از شغل خود تبلیغ کنید.</p>
+                    </div>
+                    
+                    <!-- BUTTON -->
+                    <a href="javascript:modalTechnologistFunc()"><button class="btn-main"><span class="far fa-id-card"></span> ثبت آگهی</button></a>
+
+                    <!-- MODALS -->
+                    <!-- MODAL: TECHNOLOGIST -->
+                    <div class="modal-overlay" id="modalTechnologist">
+                        <i onclick="modalTechnologistFunc()"></i>
+                        <div class="modal">
+                            <div class="modal-line" onclick="modalTechnologistFunc()"></div>
+                            <div class="modal-header">
+                                <h4>ثبت آگهی</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- FORM: TECHNOLOGIST -->
+                                <form action="/pages/technologist/" method="post" enctype="multipart/form-data">
+                                    <input type="text" name="usernameTechnologist" placeholder="نام و نام خانوادگی" aria-placeholder="نام و نام خانوادگی" aria-label="نام و نام خانوادگی" required maxlength="100">
+                                    <input type="text" name="titleTechnologist" placeholder="عنوان شغل" aria-placeholder="عنوان شغل" aria-label="عنوان شغل" required maxlength="200">
+                                    <input type="text" name="titleJobTechnologist" placeholder="انتخاب عنوان آگهی (کارجو یا کسب و کار)" aria-placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-label="انتخاب عنوان آگهی، کارجو یا کسب و کار" required maxlength="30">
+                                    <!-- <select>
+                                        <option value="" selected>انتخاب عنوان آگهی...</option>
+                                        <option value="karjo" id="option1">کارجو</option>
+                                        <option value="kasbVaKar" id="option2">کسب و کار</option>
+                                    </select> -->
+                                    <input type="email" name="emailTechnologist" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required maxlength="200">
+                                    <input type="tel" name="phoneTechnologist" placeholder="شماره تماس" aria-placeholder="شماره تماس" aria-label="شماره تماس" required maxlength="15">
+                                    <input type="text" name="categoryTechnologist" placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-label="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" required maxlength="100">
+                                    <input type="text" name="addressTechnologist" id="addressTechnologist" placeholder="آدرس محل کار" aria-placeholder="آدرس محل کار" aria-label="آدرس محل کار" maxlength="500">
+                                    <input type="text" name="desTechnologist" placeholder="توضیحات" aria-placeholder="توضیحات" aria-label="توضیحات" required maxlength="500">
+                                    <div>
+                                        <label for="">بارگذاری تصویر شما</label>
+                                        <input type="file" name="fileTechnologist" placeholder="تصویر شما" aria-placeholder="تصویر شما" aria-label="تصویر شما" required accept="image/*">
+                                    </div>
+                                    <input type="submit" value="ثبت درخواست" aria-label="ثبت درخواست">
+
+                                    <div id="hints">
+                                        <h4><span class="far fa-exclamation-circle"></span> نکات مهم</h4>
+                                        <li>اگر قصد دارید به عنوان کارجو یا تبلیغ از کسب خود آگهی را ثبت کنید، در قسمت <strong>انتخاب عنوان آگهی</strong> عنوان مربوطه را مشخص کنید (کارجو یا کسب و کار)، در غیر این صورت درخواست شما پذیرفته نمی شود.</li>
+                                        <li>در قسمت <strong>بارگذاری تصویر شما</strong> باید تصویری از چهره خود در سبک و وضوح مناسب بارگذاری کنید.</li>
+                                        <li>بعد از ثبت درخواست و بررسی درخواست شما توسط کارشناسان ما، آگهی شما تایید و در بخش فن آور اضافه می شود، و در صورت نیاز یا عدم تایید آگهی با شما تماس گرفته خواهد شد.</li>
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD TECHNOLOGIST -->
+                    <div class="grid-technologist">
+                        {% if cursor_technologist_show | length >= 1 %}
+                            {% for technologist in cursor_technologist_show %}
+                                <div class="card-technologist">
+                                    <details>
+                                        <summary>
+                                            <div class="card-technologist-header">
+                                                <img src="{{technologist[1]}}" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
+                                                <div>
+                                                    <h4>{{technologist[2]}}</h4>
+                                                    <p>{{technologist[3]}}</p>
+                                                    
+                                                    {% if technologist[7] == "تکنولوژی" %}
+                                                        <li class="badge badge-blue">{{technologist[7]}}</li>
+                                                    {% elif technologist[7] == "ساختمان" %}
+                                                        <li class="badge badge-green">{{technologist[7]}}</li>
+                                                    {% elif technologist[7] == "خودرو" %}
+                                                        <li class="badge badge-orange">{{technologist[7]}}</li>
+                                                    {% else %}
+                                                        <li class="badge badge-silver">{{technologist[7]}}</li>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
+                                        </summary>
+                                        <div class="card-technologist-body">
+                                            <p><strong>عنوان آگهی:</strong> {{technologist[4]}}</p>
+                                            <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
+                                            <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
+                                            <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
+                                            {% if technologist[8] == '' %}
+                                                <p><strong>آدرس محل کار:</strong> _</p>
+                                            {% else %}
+                                                <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
+                                            {% endif %}
+                                            <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
+                                        </div>
+                                    </details>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080;">موردی یافت نشده است، <br> اولین نفری باش که آگهی خودت رو ثبت میکنی...</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

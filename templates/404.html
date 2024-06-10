@@ -1,0 +1,18 @@
+
+{% extends 'includes/base.html' %}
+
+{% block title %}صفحه مورد نظر یافت نشد - داها{% endblock title %}
+
+
+{% block body %}
+
+    <!-- SECTION 404 -->
+    <section class="section-404">
+        <h1>404</h1>
+        <p>صفحه مورد نظر یافت نشد.</p>
+        <a href="{{url_for('index')}}">
+            <button class="btn-main">بازگشت به خانه</button>
+        </a>
+    </section>
+
+{% endblock body %}

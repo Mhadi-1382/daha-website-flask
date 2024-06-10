@@ -1,0 +1,14 @@
+
+User-agent: *
+
+Host: https://dahauni.ir/
+
+Disallow: /static/
+Disallow: /static/css/
+Disallow: /static/fonts/
+Disallow: /static/js/
+
+Disallow: /templates/admin/
+Disallow: /templates/includes/
+
+Sitemap: https://dahauni.ir/sitemap.xml

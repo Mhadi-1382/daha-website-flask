@@ -1,0 +1,97 @@
+
+<!-- NAVBAR -->
+<nav>
+    <ul>
+        <div style="margin-bottom: 30px;">
+            <!-- LOGO -->
+            <a href="{{ url_for('index') }}" style="display: flex; align-items: center;">
+                <img src="{{ url_for('static', filename='media/images/daha_logo.svg') }}" alt="داها" id="dahaLogoForLight" width="50" draggable="false">
+                <img src="{{ url_for('static', filename='media/images/daha_logo_light.svg') }}" alt="داها" id="dahaLogoForDark" width="50" draggable="false" style="display: none;">
+
+                <p class="badge badge-blue" style="margin-right: 7px;">v{{ _ver }}</p>
+            </a>
+            <li class="far fa-close" onclick="toggleNavbarMobile()" title="خروج"></li>
+        </div>
+
+        <!-- USER AVATAR WARPPER -->
+        <div class="user-avatar-warpper" onclick="toggleDropdownUserAvatarWarpper()">
+            <a href="javascript:void()">
+                <div>
+                    {% if session_user_name_filter == "ا" or session_user_name_filter == "a" or session_user_name_filter == "A" %}
+                        <li class="user-avatar">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ب" or session_user_name_filter == "b" or session_user_name_filter == "B" %}
+                        <li class="user-avatar" style="background-color: rgb(200, 14, 97);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "پ" or session_user_name_filter == "p" or session_user_name_filter == "P" %}
+                        <li class="user-avatar" style="background-color: rgb(228, 106, 20);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ت" or session_user_name_filter == "ط" or session_user_name_filter == "t" or session_user_name_filter == "T" %}
+                        <li class="user-avatar" style="background-color: rgb(43, 133, 61);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "س" or session_user_name_filter == "ص" or session_user_name_filter == "ش" or session_user_name_filter == "ث" or session_user_name_filter == "s" or session_user_name_filter == "S" or session_user_name_filter == "c" or session_user_name_filter == "C" %}
+                        <li class="user-avatar" style="background-color: rgb(125, 181, 44);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ج" or session_user_name_filter == "چ" or session_user_name_filter == "j" or session_user_name_filter == "J" %}
+                        <li class="user-avatar" style="background-color: rgb(25, 37, 75);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ح" or session_user_name_filter == "ه" or session_user_name_filter == "خ" or session_user_name_filter == "h" or session_user_name_filter == "H" %}
+                        <li class="user-avatar" style="background-color: rgb(190, 26, 33);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "د" or session_user_name_filter == "d" or session_user_name_filter == "D" %}
+                        <li class="user-avatar" style="background-color: rgb(239, 184, 29);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ز" or session_user_name_filter == "ض" or session_user_name_filter == "ظ" or session_user_name_filter == "ذ" or session_user_name_filter == "z" or session_user_name_filter == "Z" %}
+                        <li class="user-avatar" style="background-color: rgb(25, 132, 114);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ر" or session_user_name_filter == "ژ" or session_user_name_filter == "r" or session_user_name_filter == "R" %}
+                        <li class="user-avatar" style="background-color: rgb(171, 148, 192);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ق" or session_user_name_filter == "غ"  or session_user_name_filter == "ع" or session_user_name_filter == "q" or session_user_name_filter == "Q" %}
+                        <li class="user-avatar" style="background-color: rgb(240, 184, 169);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ف" or session_user_name_filter == "f" or session_user_name_filter == "F" %}
+                        <li class="user-avatar" style="background-color: rgb(255, 0, 0);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ک" or session_user_name_filter == "k" or session_user_name_filter == "K" %}
+                        <li class="user-avatar" style="background-color: rgb(19, 255, 0);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "گ" or session_user_name_filter == "g" or session_user_name_filter == "G" %}
+                        <li class="user-avatar" style="background-color: rgb(255, 176, 139);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ل" or session_user_name_filter == "l" or session_user_name_filter == "L" %}
+                        <li class="user-avatar" style="background-color: rgb(156, 39, 176);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "م" or session_user_name_filter == "m" or session_user_name_filter == "M" %}
+                        <li class="user-avatar" style="background-color: rgb(158, 147, 82);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ن" or session_user_name_filter == "n" or session_user_name_filter == "N" %}
+                        <li class="user-avatar" style="background-color: rgb(32, 72, 85);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "و" or session_user_name_filter == "w" or session_user_name_filter == "W" or session_user_name_filter == "v" or session_user_name_filter == "V" or session_user_name_filter == "u" or session_user_name_filter == "U" or session_user_name_filter == "o" or session_user_name_filter == "O" %}
+                        <li class="user-avatar" style="background-color: rgb(68, 56, 35);">{{ session_user_name_filter }}</li>
+                    {% elif session_user_name_filter == "ی" or session_user_name_filter == "y" or session_user_name_filter == "Y" or session_user_name_filter == "x" or session_user_name_filter == "X" or session_user_name_filter == "i" or session_user_name_filter == "I" or session_user_name_filter == "e" or session_user_name_filter == "E" %}
+                        <li class="user-avatar" style="background-color: rgb(79, 87, 206);">{{ session_user_name_filter }}</li>
+    
+                    {% else %}
+                        <li class="user-avatar">{{ session_user_name_filter }}</li>
+                    {% endif %}
+                    <div>
+                        <p>{{ session_user_name }}</p>
+                        <p>{{ session_user_email }}</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- DROPDOWN USER AVATAR WARPPER -->
+            <div class="dropdown-user-avatar-warpper" id="dropdownUserAvatarWarpper">
+                <a href="javascript:modalEditInfoFunc()"><li><span class="far fa-pencil"></span> ویرایش اطلاعات</li></a>
+                <a href="javascript:modalStatusAdFunc()"><li><span class="far fa-ad"></span> تاریخچه آگهی شما</li></a>
+                <a href="javascript:toggleThemeModeDark()" id="toggleModeTextMoon" title="تم تاریک"><li><span class="far fa-moon"></span></span> تم تاریک</li></a>
+                <a href="javascript:toggleThemeModelight()" id="toggleModeTextSun" style="display: none;" title="تم روشن"><li><span class="far fa-sun"></span> تم روشن</li></a>
+                {% if session_user_email == email_admin %}
+                    <a href="javascript:modalHelpAdminFunc()"><li><span class="far fa-circle-question"></span>راهنمای مدیر</li></a>
+                {% else %}
+                    <a href="javascript:modalDeleteAccountFunc()" style="color: red;"><li><span class="far fa-trash"></span> حذف حساب کاربری</li></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <a href="{{ url_for('index') }}"><li><span class="far fa-home"></span> <span>خانه</span></li></a>
+        <a href="{{ url_for('download') }}"><li><span class="far fa-download"></span> <span>دانلود اپلیکیشن</span></li></a>
+        <a href="javascript:modalCommentFunc()"><li><span class="far fa-comment"></span> <span>نظر سنجی</span></li></a>
+        <a href="javascript:modalAboutFunc()"><li><span class="far fa-info-circle"></span> <span>درباره ما</span></li></a>
+        <a href="javascript:modalSupportFunc()"><li><span class="far fa-phone"></span> <span>پشتیبانی</span></li></a>
+    </ul>
+    <ul>
+        {% if session_user_email == email_admin %}
+            <a href="{{ url_for('admin') }}"><li><span class="far fa-dashboard"></span> <span>داشبورد مدیر</span></li></a>
+        {% endif %}
+
+        <a href="{{ url_for('logout') }}"><li><span class="far fa-sign-out"></span> <span>خروج از حساب کاربری</span></li></a>
+    </ul>
+</nav>

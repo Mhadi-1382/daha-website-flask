@@ -1,0 +1,58 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید اطلاعاتی در مورد انجمن هایی که در دانشکده وجود دارد کسب کنید.{% endblock des %}
+{% block key %}داها، انجمن ها، انجمن ها داها{% endblock key %}
+{% block title %}انجمن ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- Forums -->
+                <div class="majors forums">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید اطلاعاتی در مورد انجمن هایی که در دانشکده وجود دارد کسب کنید.</p>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <a href="javascript:forums1()"><button class="btn-main"><span>انجمن رشته کامپیوتر</span> <li class="far fa-angle-down" id="forumsCard1BtnAngleDown"></li><li class="far fa-angle-up" id="forumsCard1BtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="forumsCard1">
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>روزبه زارعی (دبیر)</p></a>
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>محمد مهدی ربیعی (نایب دبیر)</p></a>
+                    </div>
+                    <a href="javascript:forums2()"><button class="btn-main"><span>انجمن رشته الکترونیک</span> <li class="far fa-angle-down" id="forumsCard2BtnAngleDown"></li><li class="far fa-angle-up" id="forumsCard2BtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="forumsCard2">
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>احمدرضا مظفری (دبیر)</p></a>
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>محمد صادق عالی نسب (دبیر)</p></a>
+                    </div>
+                    <a href="javascript:forums3()"><button class="btn-main"><span>انجمن رشته مکانیک</span> <li class="far fa-angle-down" id="forumsCard3BtnAngleDown"></li><li class="far fa-angle-up" id="forumsCard3BtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="forumsCard3">
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>محمد حسین حسینی (دبیر)</p></a>
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>محمد ماهان طالبی فرهانی (دبیر)</p></a>
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>مرتضی نبی پور (دبیر)</p></a>
+                    </div>
+                    <a href="javascript:forums4()"><button class="btn-main"><span>انجمن رشته معماری</span> <li class="far fa-angle-down" id="forumsCard4BtnAngleDown"></li><li class="far fa-angle-up" id="forumsCard4BtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="forumsCard4">
+                        <a href="javascript:void(0)"><li class="far fa-forums"></li> <p>امیر علی تقی کاسه گر (دبیر)</p></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#fff">
+        <meta name="description" content="{% block des %} {% endblock des %}">
+        <meta name="keywords" content="{% block key %} {% endblock key %}">
+
+        <!-- IMPORT CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- IMPORT FONTAWESOME CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='fonts/css/fontawesome.min.css') }}">
+         
+        <!-- FAVICON -->
+        <link rel="shortcut icon" href="{{ url_for('static', filename='media/images/icon.svg') }}" type="image/x-icon">
+
+        <!-- IMPORT MANIFEST -->
+        <link rel="manifest" href="/manifest.json">
+
+        <!-- TITLE -->
+        <title>{% block title %} {% endblock title %}</title>
+    </head>
+    <body>
+
+        <!-- ALERT OFFLINE MODE -->
+        <div class="modal-overlay" id="AlertOfflineMode">
+            <i onclick="AlertOfflineModeFunc()"></i>
+            <div class="modal" style="overflow: visible;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 35px; height: 35px; scale: 1.4; background-color: #fff; padding: 5px; border-radius: 9999px; position: absolute; top: -12px;"><path style="fill: #606060;" d="M634.91 154.88C457.74-8.99 182.19-8.93 5.09 154.88c-6.66 6.16-6.79 16.59-.35 22.98l34.24 33.97c6.14 6.1 16.02 6.23 22.4.38 145.92-133.68 371.3-133.71 517.25 0 6.38 5.85 16.26 5.71 22.4-.38l34.24-33.97c6.43-6.39 6.3-16.82-.36-22.98zM320 352c-35.35 0-64 28.65-64 64s28.65 64 64 64 64-28.65 64-64-28.65-64-64-64zm202.67-83.59c-115.26-101.93-290.21-101.82-405.34 0-6.9 6.1-7.12 16.69-.57 23.15l34.44 33.99c6 5.92 15.66 6.32 22.05.8 83.95-72.57 209.74-72.41 293.49 0 6.39 5.52 16.05 5.13 22.05-.8l34.44-33.99c6.56-6.46 6.33-17.06-.56-23.15z"/></svg>
+                <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; margin-top: 18px;">
+                    <h3>ارتباط برقرار نشد</h3>
+                    <p style="margin-bottom: 20px; color: #505050;">لطفا اتصال به اینترنت را بررسی و مجددا تلاش کنید</p>
+                    <a href="javascript:void()" onclick="location.reload();" class="button" style="margin: 0 !important; color: white; padding: 7px 25px; width: 100%;">تلاش مجدد</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN -->
+        <main>
+            {% block body %} {% endblock body %}
+        </main>
+
+
+        <!-- IMPORT JS -->
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+        
+    </body>
+</html>

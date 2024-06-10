@@ -1,0 +1,40 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید به سامانه رزرو غذا (نسخه جدید و قدیمی) دسترسی داشته باشید.{% endblock des %}
+{% block key %}داها، رزرو غذا رزرو غذا داها{% endblock key %}
+{% block title %}رزرو غذا - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- FOOD RESERVATION -->
+                <div class="food-reservation">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید به سامانه رزرو غذا (نسخه جدید و قدیمی) دسترسی داشته باشید.</p>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <a href="https://samad.app/"><button class="btn-main"><li class="far fa-globe"></li> <span>سامانه نسخه جدید (سماد)</span></button></a>
+                    <a href="https://saba.tvu.ac.ir/index.rose"><button class="btn-main"><li class="far fa-globe"></li> <span>سامانه نسخه قدیمی (صبا)</span></button></a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

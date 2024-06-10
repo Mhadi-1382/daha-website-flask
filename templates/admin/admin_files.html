@@ -1,0 +1,69 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > فایلها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main admin-file">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW FILES UPLOADED -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_files }} فایل</h4>
+                            <p>مشاهده تمام فایلها</p>
+                        </div>
+                        <li class="far fa-files files-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION SHOW FILES UPLOADED -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="show-files-uploaded-title">فایلها</h3>
+                </div>
+                
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    {% if path_folder_files_uploaded | length >= 1 %}
+                        {% for file in path_folder_files_uploaded %}
+                            <div class="table-body">
+                                <a href="/static/media/uploads/{{file}}" target="_blank" title="{{file}}">
+                                    <div class="card-file">
+                                        <!-- <img src="/static/media/uploads/{{file}}" alt="{{file}}" loading="lazy"> -->
+                                        <p>{{file}}</p>
+                                    </div>
+                                </a>
+
+                                <form action="/delete_admin_files/{{file}}" method="post" style="width: auto; padding: 0; margin: 0;">
+                                    <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

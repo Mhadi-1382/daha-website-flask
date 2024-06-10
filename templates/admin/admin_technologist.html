@@ -1,0 +1,156 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > آگهی ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW TECHNOLOGIST -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_technologists }} آگهی ارسال شده</h4>
+                            <p>مشاهده تمام آگهی های ارسال شده</p>
+                        </div>
+                        <li class="far fa-id-card technologists-icon"></li>
+                    </div>
+                </div>
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_technologists_set }} آگهی ثبت شده</h4>
+                            <p>مشاهده تمام آگهی های ثبت شده</p>
+                        </div>
+                        <li class="far fa-id-card technologists-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION TECHNOLOGIST -->
+            <section class="section-content section-technologist">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="id-card-title">آگهی های ارسال شده</h3>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <!-- <li>ردیف</li> -->
+                            <li>نام و نام خانوادگی</li>
+                            <li>عنوان شغل</li>
+                            <li>عنوان آگهی</li>
+                            <li>ایمیل</li>
+                            <li>شماره تماس</li>
+                            <li>دسته بندی</li>
+                            <li>آدرس محل کار</li>
+                            <li>توضیحات</li>
+                            <li>تاریخ ثبت درخواست</li>
+                            <li></li>
+                            <li></li>
+                        </div>
+                        {% if cursor_technologist_show | length >= 1 %}
+                            {% for technologist in cursor_technologist_show %}
+                                <div class="table-body table-body-comments">
+                                    <!-- <li>{{technologist[0]}}</li> -->
+                                    <li>{{technologist[1]}}</li>
+                                    <li title="{{technologist[2]}}">{{technologist[2]}}</li>
+                                    <li>{{technologist[3]}}</li>
+                                    <li><a href="mailto:{{technologist[4]}}">{{technologist[4]}}</a></li>
+                                    <li><a href="tel:{{technologist[5]}}">{{technologist[5]}}</a></li>
+                                    <li>{{technologist[6]}}</li>
+                                    <li title="{{technologist[7]}}">{{technologist[7]}}</li>
+                                    <li title="{{technologist[8]}}">{{technologist[8]}}</li>
+                                    <li>{{technologist[9]}}</li>
+
+                                    <form action="/delete_technologists_get/{{technologist[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                    <form action="/delete_technologists_get_ad/{{technologist[0]}}" method="post">
+                                        <button type="submit" title="رد کردن درخواست"><span class="far fa-circle-xmark"></span></button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            <section class="section-content section-technologist">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="id-card-title">آگهی های ثبت شده</h3>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header" style="width: 2000px;">
+                            <!-- <li>ردیف</li> -->
+                            <li>لینک تصویر</li>
+                            <li>نام و نام خانوادگی</li>
+                            <li>عنوان شغل</li>
+                            <li>عنوان آگهی</li>
+                            <li>ایمیل</li>
+                            <li>شماره تماس</li>
+                            <li>دسته بندی</li>
+                            <li>آدرس محل کار</li>
+                            <li>توضیحات</li>
+                            <li>تاریخ ثبت درخواست</li>
+                            <li>تاریخ انقضا</li>
+                            <li></li>
+                            <li></li>
+                        </div>
+                        {% if cursor_technologist_set_show | length >= 1 %}
+                            {% for technologist in cursor_technologist_set_show %}
+                                <div class="table-body table-body-comments" style="width: 2000px;">
+                                    <!-- <li>{{technologist[0]}}</li> -->
+                                    <li><a href="{{technologist[1]}}">{{technologist[1]}}</a></li>
+                                    <li>{{technologist[2]}}</li>
+                                    <li>{{technologist[3]}}</li>
+                                    <li>{{technologist[4]}}</li>
+                                    <li><a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></li>
+                                    <li><a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></li>
+                                    <li>{{technologist[7]}}</li>
+                                    <li title="{{technologist[8]}}">{{technologist[8]}}</li>
+                                    <li title="{{technologist[9]}}">{{technologist[9]}}</li>
+                                    <li>{{technologist[10]}}</li>
+                                    <li>{{technologist[11]}}</li>
+                                    
+                                    <form action="/delete_technologists_set/{{technologist[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                    <form action="/delete_technologists_set_ad/{{technologist[0]}}" method="post">
+                                        <button type="submit" title="اتمام نمایش آگهی"><span class="far fa-calendar-clock"></span></button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

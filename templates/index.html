@@ -1,0 +1,137 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}با اپلیکیشن داها میتونی خیلی راحت کارهای مربوط به دانشگاه خودت رو انجام بدی؛ کارهایی مثل دانلود چارت درسی، سامانه های مهم، دریافت اخبار و مسایل مربوط به دانشگاه و دانشجویان بصورت نوتیفیکیشن و ایمیل، دریافت جزوه های درسی، معرفی یا تبلیغ از کسب و کارت و کلی امکانات جذاب دیگه!{% endblock des %}
+{% block key %}داها، دانشکده علامه حسن زاده آملی، اپلیکیشن داها، اپلیکیشن اختصاصی دانشکده علامه حسن زاده آملی، کامپیوتر، فن آور در داها، چارت درسی در داها، پسران آمل، آمل، اپ داها، انجمن کامپیوتر، کسب و کارهای دانشجویان، پلتفرم داها، سایت بوستان، فنی و حرفه ای، دانشگاه فنی و حرفه ای، بوستان، علامه حسن زاده آملی، نرم افزار، دانشجو، رشته ها، سامانه ها، رزرو غذا، انجمن ها، رویدادها، انتشارات{% endblock key %}
+{% block title %}داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/splash_screen.html' %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main index">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <a href="{{ url_for('majors') }}" title="رشته ها" aria-label="رشته ها">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/budget-vector-free-icon-set-34.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>رشته ها</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('sites') }}" title="سامانه ها" aria-label="سامانه ها">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/business-vector-free-icon-set-33.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>سامانه ها</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('food_reservation') }}" title="رزرو غذا" aria-label="رزرو غذا">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/kitchenware-and-items-vector-free-icon-set-39.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>رزرو غذا</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://bustan.tvu.ac.ir/" title="بوستان" aria-label="بوستان">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/leader-vector-free-icon-set-26.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>بوستان</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('forums') }}" title="انجمن ها" aria-label="انجمن ها">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/leader-vector-free-icon-set-21.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>انجمن ها</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('technologist') }}" title="فن آور" aria-label="فن آور">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/research-vector-free-icon-set-32.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>فن آور</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('events') }}" title="رویداد ها" aria-label="رویداد ها">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/marketing-vector-free-icon-set-30.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>رویداد ها</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.google.com/maps/place/Allameh+Hassanzadeh+Amoli/@36.5186425,52.3299411,15z/data=!4m6!3m5!1s0x3f8fa2258572fd69:0xf703fd230fa02746!8m2!3d36.5186425!4d52.3299411!16s%2Fg%2F11cn0qdb5q?entry=ttu" title="نقشه دانشکده" aria-label="نقشه دانشکده">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/map-vector-free-icon-set-24.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>نقشه دانشکده</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ url_for('publishers') }}" title="انتشارات" aria-label="انتشارات">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/books-vector-free-icons-set-29.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>انتشارات</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- MODAL: ALERT HOMEPAGE -->
+    <div class="modal-overlay" id="modalAlertHomepage">
+        <i onclick="modalAlertHomepageFunc()"></i>
+        <div class="modal">
+            <div class="modal-line" onclick="modalAlertHomepageFunc()">
+                <img src="../static/media/images/elements/megaphone.png" alt="" width="53px">
+            </div>
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                {% for alert in cursor_alerts %}
+                    <h4 id="modalAlertHomepageTagh4Lenght">{{alert[1]}}</h4>
+                    <p id="modalAlertHomepageTagPLenght">{{alert[2]}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,42 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}ورود به حساب کاربری{% endblock des %}
+{% block key %}داها، ورود به حساب کاربری، داها لاگین، صفحه ورود به داها{% endblock key %}
+{% block title %}ورود به حساب کاربری - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert" id="alert-diplay">
+                    <li class="far fa-close"></li>
+                    {{ messages[0] }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-in">
+        <!-- FORM: LOGIN -->
+        <form action="/login" method="post">
+            <!-- LOGO DAHA -->
+            <img src="{{ url_for('static', filename='media/images/icon.svg') }}" alt="logo daha" class="form-in-logo" draggable="false">
+
+            <h4 style="margin-top: 120px;">ورود به حساب کاربری</h4>
+            <p style="margin-top: -15px; margin-bottom: 20px; font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
+
+            <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
+            <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+            <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
+            <input type="submit" value="ورود" aria-label="ورود" id="eventSubmitLogin" onclick="eventSubmitLoginFunc()">
+
+            <!-- LOGIN LINK -->
+            <a href="{{url_for('singup')}}">در داها ثبت‌ نام نکرده اید؟ ثبت نام</a>
+            <a href="{{url_for('forget_password')}}">فراموشی رمز عبور</a>
+        </form>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,76 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > تیکت ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW TICKET -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_ticket }} تیکت</h4>
+                            <p>مشاهده تمام تیکت ها</p>
+                        </div>
+                        <li class="far fa-ticket ticket-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION TICKET -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="ticket-title">تیکت ها</h3>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>نام و نام خانوادگی</li>
+                        <li>موضوع تیکت</li>
+                        <li>متن تیکت</li>
+                        <li>ایمیل</li>
+                        <li>تاریخ ثبت</li>
+                        <li></li>
+                    </div>
+                    {% if cursor_ticket_show | length >= 1 %}
+                        {% for ticket in cursor_ticket_show %}
+                            <div class="table-body table-body-users">
+                                <li>{{ticket[1]}}</li>
+                                <li title="{{ticket[2]}}">{{ticket[2]}}</li>
+                                <input type="text" id="tableBodyComments" value="{{ticket[4]}}" title="{{ticket[4]}}">
+                                <li><a href="mailto:{{ticket[3]}}">{{ticket[3]}}</a></li>
+                                <li>{{ticket[5]}}</li>
+
+                                <form action="/delete_ticket/{{ticket[0]}}" method="post">
+                                    <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

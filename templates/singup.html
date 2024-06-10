@@ -1,0 +1,62 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}ایجاد حساب کاربری{% endblock des %}
+{% block key %}داها، ایجاد حساب کاربری، داها ثبت نام، صفحه ثبت نام داها{% endblock key %}
+{% block title %}ایجاد حساب کاربری - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert" id="alert-diplay">
+                    <li class="far fa-close"></li>
+                    {{ messages[0] }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-in">
+        <!-- FORM: SINGUP -->
+        <form action="/singup" method="post">
+            <!-- LOGO DAHA -->
+            <img src="{{ url_for('static', filename='media/images/icon.svg') }}" alt="logo daha" class="form-in-logo" draggable="false">
+
+            <h4 style="margin-top: 120px;">ایجاد حساب کاربری</h4>
+            <p style="margin-top: -15px; margin-bottom: 20px; font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
+
+            <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
+            <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+            <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
+            <a href="javascript:modalPossibilities2Func()" style="margin-top: 10px; margin-bottom: 5px; font-size: 12px; text-align: right;" class="link-singin-conditions"><span class="far fa-check-circle"></span> شرایط ثبت نام</a>
+
+            <input type="submit" value="ثبت نام" aria-label="ثبت نام" id="eventSubmitSingin" onclick="eventSubmitSinginFunc(); navigator.vibrate(200)">
+
+            <!-- LOGIN LINK -->
+            <a href="{{url_for('login')}}">در داها ثبت‌ نام کرده‌اید؟ ورود</a>
+        </form>
+    </div>
+
+    <!-- MODAL: CONDITIONS -->
+    <div class="modal-overlay" id="modalPossibilities2">
+        <i onclick="modalPossibilities2Func()"></i>
+        <div class="modal" style="height: 55%;">
+            <div class="modal-line" onclick="modalPossibilities2Func()"></div>
+            <div class="modal-header">
+                <h4>شرایط ثبت نام</h4>
+            </div>
+            <div class="modal-body">
+                <div id="hints">
+                    <p style="margin-bottom: 20px;">کاربر گرامی لطفا موارد زیر را جهت استفاده بهینه از سرویس های داها با دقت ملاحظه فرمایید.</p>
+                    <li><strong>نکته اول:</strong> الزاما از ایمیل معتبر استفاده کنید، زیرا برخی از سرویس های داها نیاز به ایمیل دارند به عنوان مثال؛ برای ثبت آگهی و ... شما باید ایمیل داشته باشید تا بعد از ثبت درخواست، وضعیت آگهی تان به شما اعلام شود.</li>
+                    <li><strong>نکته دوم:</strong> سعی کنید تمامی بخش های خواسته شده را با اطلاعات واقعی و حقیقی خود ثبت کنید.</li>
+                    <li><strong>نکته سوم:</strong> رمز عبور خود را ترکیبی از اعداد، حروف و علایم قرار دهید، تا حسابتان ایمن بماند.</li>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

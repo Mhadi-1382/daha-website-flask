@@ -1,0 +1,614 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داشبورد مدیر{% endblock des %}
+{% block key %}داها، داشبورد مدیر{% endblock key %}
+{% block title %}داشبورد مدیر - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main admin">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left">
+                <!-- NUMBER USERS -->
+                <a href="{{url_for('admin_users')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_users }} کاربر</h4>
+                                <p>مشاهده لیست کاربران</p>
+                            </div>
+                            <li class="far fa-users users-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER COMMENTS -->
+                <a href="{{url_for('admin_comments')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_comments }} نظر</h4>
+                                <p>مشاهده نظرات کاربران</p>
+                            </div>
+                            <li class="far fa-comments comments-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER TECHNOLOGIST -->
+                <a href="{{url_for('admin_technologist')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_technologists }} آگهی ارسال شده</h4>
+                                <p>مشاهده تمام آگهی ها</p>
+                            </div>
+                            <li class="far fa-id-card technologists-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER EVENTS -->
+                <a href="{{url_for('admin_events')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_events }} رویداد</h4>
+                                <p>مشاهده تمام رویداد ها</p>
+                            </div>
+                            <li class="far fa-calendar-check events-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER SITES -->
+                <a href="{{url_for('admin_sites')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_sites }} سامانه</h4>
+                                <p>مشاهده تمام سامانه ها</p>
+                            </div>
+                            <li class="far fa-globe sites-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER PUBLISHERS -->
+                <a href="{{url_for('admin_publishers')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_publishers }} جزوه</h4>
+                                <p>مشاهده تمام جزوه ها</p>
+                            </div>
+                            <li class="far fa-file-text publishers-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER TICKET -->
+                <a href="{{url_for('admin_ticket')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_ticket }} تیکت</h4>
+                                <p>مشاهده تمام تیکت ها</p>
+                            </div>
+                            <li class="far fa-ticket ticket-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION POSSIBILITIES -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="possibilities-title">امکانات</h3>
+                </div>
+                <!-- BUTTONS -->
+                <div>
+                    <a href="javascript:modalPossibilities1Func()"><button class="btn-main"><span class="far fa-file-text"></span> بارگذاری جزوه</button></a>
+                    <a href="javascript:modalPossibilities2Func()"><button class="btn-main"><span class="far fa-globe"></span> افزودن سامانه</button></a>
+                    <a href="javascript:modalPossibilities3Func()"><button class="btn-main"><span class="far fa-calendar-check"></span> افزودن رویداد</button></a>
+                    <a href="javascript:modalPossibilities4Func()"><button class="btn-main"><span class="far fa-id-card"></span> افزودن آگهی</button></a>
+                    <a href="javascript:modalPossibilities5Func()"><button class="btn-main"><span class="far fa-envelope"></span>ارسال ایمیل</button></a>
+                    <a href="javascript:modalPossibilities6Func()"><button class="btn-main"><span class="far fa-bell"></span>ارسال نوتیفیکیشن</button></a>
+                    <a href="javascript:modalPossibilities7Func()"><button class="btn-main"><span class="far fa-megaphone"></span>افزودن اعلان</button></a>
+                </div>
+
+                <!-- MODALS -->
+                <!-- MODAL: POSSIBILITIES 1 -->
+                <div class="modal-overlay" id="modalPossibilities1">
+                    <i onclick="modalPossibilities1Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities1Func()"></div>
+                        <div class="modal-header">
+                            <h4>بارگذاری جزوه</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: PUBLISHERS 1 -->
+                            <form action="/pages/publishers/" method="post">
+                                <input type="text" name="titleHandout" placeholder="عنوان رشته، جزوه" aria-placeholder="عنوان رشته، جزوه" aria-label="عنوان رشته، جزوه" required>
+                                <input type="url" name="linkHandout" placeholder="لینک فایل" aria-placeholder="لینک فایل" aria-label="لینک فایل" required>
+                                <input type="submit" value="بارگذاری" aria-label="بارگذاری">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 2 -->
+                <div class="modal-overlay" id="modalPossibilities2">
+                    <i onclick="modalPossibilities2Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities2Func()"></div>
+                        <div class="modal-header">
+                            <h4>افزودن سامانه</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: PUBLISHERS 2 -->
+                            <form action="/pages/sites/" method="post">
+                                <input type="text" name="titleSites" placeholder="عنوان سامانه" aria-placeholder="عنوان سامانه" aria-label="عنوان سامانه" required>
+                                <input type="url" name="urlSites" placeholder="لینک سامانه" aria-placeholder="لینک سامانه" aria-label="لینک سامانه" required>
+                                <input type="submit" value="افزودن" aria-label="افزودن">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 3 -->
+                <div class="modal-overlay" id="modalPossibilities3">
+                    <i onclick="modalPossibilities3Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities3Func()"></div>
+                        <div class="modal-header">
+                            <h4>افزودن رویداد</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: PUBLISHERS 3 -->
+                            <form action="/pages/events/" method="post">
+                                <input type="url" name="imageUrlEvents" placeholder="لینک تصویر" aria-placeholder="لینک تصویر" aria-label="لینک تصویر" required>
+                                <input type="text" name="titleEvents" placeholder="عنوان رویداد" aria-placeholder="عنوان رویداد" aria-label="عنوان رویداد" required maxlength="500">
+                                <input type="text" name="desEvents" placeholder="توضیحات مختصر رویداد" aria-placeholder="توضیحات مختصر رویداد" aria-label="توضیحات مختصر رویداد" maxlength="500">
+                                <input type="url" name="urlEvents" placeholder="لینک رویداد" aria-placeholder="لینک رویداد" aria-label="لینک رویداد" required>
+                                <input type="submit" value="افزودن" aria-label="افزودن">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 4 -->
+                <div class="modal-overlay" id="modalPossibilities4">
+                    <i onclick="modalPossibilities4Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities4Func()"></div>
+                        <div class="modal-header">
+                            <h4>افزودن آگهی</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: TECHNOLOGIST -->
+                            <form action="/pages/technologist_set/" method="post" enctype="multipart/form-data">
+                                <input type="text" name="usernameTechnologist" placeholder="نام و نام خانوادگی" aria-placeholder="نام و نام خانوادگی" aria-label="نام و نام خانوادگی" required maxlength="100">
+                                <input type="text" name="titleTechnologist" placeholder="عنوان شغل" aria-placeholder="عنوان شغل" aria-label="عنوان شغل" required maxlength="200">
+                                <input type="text" name="titleJobTechnologist" placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-label="انتخاب عنوان آگهی، کارجو یا کسب و کار" required maxlength="30">
+                                <input type="email" name="emailTechnologist" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required maxlength="200">
+                                <input type="tel" name="phoneTechnologist" placeholder="شماره تماس" aria-placeholder="شماره تماس" aria-label="شماره تماس" required maxlength="15">
+                                <input type="text" name="categoryTechnologist" placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-label="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" required maxlength="100">
+                                <input type="text" name="addressTechnologist" id="addressTechnologist" placeholder="آدرس محل کار" aria-placeholder="آدرس محل کار" aria-label="آدرس محل کار" maxlength="500">
+                                <input type="text" name="desTechnologist" placeholder="توضیحات" aria-placeholder="توضیحات" aria-label="توضیحات" required maxlength="500">
+                                <div style="margin-bottom: 0 !important;">
+                                    <label for="dateExpir">تاریخ انقضا</label>
+                                    <input type="datetime" style="direction: ltr;" name="dateExpir" id="dateExpir" placeholder="1403-01-10 16:50" aria-placeholder="1403-01-10 16:50" aria-label="1403-01-10 16:50">
+                                </div>
+                                <div>
+                                    <label for="fileUrlTechnologist">بارگذاری تصویر</label>
+                                    <input type="url" name="fileUrlTechnologist" id="fileUrlTechnologist" placeholder="لینک تصویر" aria-placeholder="لینک تصویر" aria-label="لینک تصویر" required maxlength="1000">
+                                </div>
+                                <input type="submit" value="افزودن" aria-label="افزودن"> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 5 -->
+                <div class="modal-overlay" id="modalPossibilities5">
+                    <i onclick="modalPossibilities5Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities5Func()"></div>
+                        <div class="modal-header">
+                            <h4>ارسال ایمیل</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: SEND EMAIL -->
+                            <form action="/admin/admin_send_email/" method="post">
+                                <input type="email" name="emailTo" id="emailTo_sendEmail" placeholder="ایمیل کاربر" aria-placeholder="ایمیل کاربر" aria-label="ایمیل کاربر">
+                                <input type="text" name="emailSubject" placeholder="موضوع ایمیل" aria-placeholder="موضوع ایمیل" aria-label="موضوع ایمیل" required>
+                                <textarea name="emailMessage" rows="5" placeholder="پیام شما..." aria-placeholder="پیام شما..." aria-label="پیام شما..." required></textarea>
+                                <div style="margin: 10px 0; font-size: 14px; display: flex; align-items: center;">
+                                    <input type="checkbox" value="sendAll" name="sendAllEmail" id="sendAllEmail_sendEmail" aria-label="ارسال همگانی">
+                                    <label for="sendAllEmail_sendEmail" style="margin-right: 10px; cursor: pointer;" onclick="sendAllEmail()">ارسال همگانی</label>
+                                </div>
+                                <input type="submit" value="ارسال" aria-label="ارسال">
+
+                                <div id="hints">
+                                    <h4><span class="far fa-exclamation-circle"></span> توجه</h4>
+                                    <li style="margin-bottom: 30px;">برای ایجاد فاصله بین خطوط در قسمت <strong>پیام شما</strong> می توانید از کلمه یا تگ <kbd title="<br>">br</kbd> به اینصورت <input type="text" value="<br>" readonly title="<br>" style="all: unset; width: 30px;"> استفاده کنید، به ازای هر br یک خط جدید ایجاد می شود.</li>
+
+                                    <h4><span class="far fa-users"></span> ایمیل کاربران</h4>
+                                    <div class="table-container" style="height: 300px; overflow: auto;">
+                                        <div class="table-header" style="width: 100%;">
+                                            <li style="list-style: none; padding: 0; margin: 0;">نام کاربری</li>
+                                            <li style="list-style: none; padding: 0; margin: 0;">ایمیل</li>
+                                        </div>
+                                        {% for username_email in show_email_users %}
+                                            <div class="table-body table-body-users" style="width: 100%;">
+                                                <li style="list-style: none; padding: 0; margin: 0;">{{username_email[1]}}</li>
+                                                <li style="list-style: none; padding: 0; margin: 0;"><a href="mailto:{{username_email[2]}}">{{username_email[2]}}</a></li>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 6 -->
+                <div class="modal-overlay" id="modalPossibilities6">
+                    <i onclick="modalPossibilities6Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities6Func()"></div>
+                        <div class="modal-header">
+                            <h4>ارسال نوتیفیکیشن</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: SEND NOTIFY -->
+                            <form action="/admin/admin_send_notify/" method="post">
+                                <input type="url" name="notifyUrlImage" placeholder="آدرس تصویر" aria-placeholder="آدرس تصویر" aria-label="آدرس تصویر">
+                                <input type="text" name="notifySubject" placeholder="موضوع نوتیفیکیشن" aria-placeholder="موضوع نوتیفیکیشن" aria-label="موضوع نوتیفیکیشن" required>
+                                <textarea name="notifyMessage" rows="5" placeholder="پیام نوتیفیکیشن..." aria-placeholder="پیام نوتیفیکیشن..." aria-label="پیام نوتیفیکیشن..." required></textarea>
+                                <input type="submit" value="ارسال" aria-label="ارسال">
+
+                                <div id="hints">
+                                    <h4><span class="far fa-exclamation-circle"></span> نکات مهم</h4>
+                                    <li>قسمت <strong>آدرس تصویر</strong> اختیاری می باشد، یعنی نیاز به پر کردن آن نیست، مگر در صورت نیاز می توانید آدرس تصویر را وارد کنید.</li>
+                                    <li>در قسمت <strong>موضوع نوتیفیکیشن و پیام نوتیفیکیشن</strong> سعی شود متن عنوان یا پیام زیاد طولانی نباشد، چون امکان دارد در گوشی متن کامل دیده نشود و همچنین در برخی از موارد سرویس ارسال نوتیفیکیشن هم از ارسال متون طولانی خودداری میکند.</li>
+                                    <li>نوتیفیکیشن در تمام دستگاه هایی که اپلیکیشن را نصب دارند ارسال می شود، اما امکان دارد در بعضی از دستگاه ها، به دلایل خاصی از جمله؛ مشکل در برقراری ارتباط با سرویس گوگل پلی یا نداشتن دسترسی نوتیفیکیشن در دستگاه و... نوتیفیکیشن ارسال نشود.</li>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 7 -->
+                <div class="modal-overlay" id="modalPossibilities7">
+                    <i onclick="modalPossibilities7Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities7Func()"></div>
+                        <div class="modal-header">
+                            <h4>افزودن پیغام</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: SEND ALERT -->
+                            <form action="/admin/admin_send_alert/" method="post">
+                                <input type="text" name="titleAlert" placeholder="عنوان پیغام" aria-placeholder="عنوان پیغام" aria-label="عنوان پیغام" required maxlength="500">
+                                <textarea name="contentAlert" rows="5" placeholder="محتوای پیغام..." aria-placeholder="محتوای پیغام..." aria-label="محتوای پیغام..." required></textarea>
+                                <input type="submit" value="افزودن" aria-label="افزودن">
+                            </form>
+
+                            <div id="hints">
+                                <h4><span class="far fa-cog"></span> تنظیمات</h4>
+                                <a href="/admin/delete_send_alert/">
+                                    <button class="btn-main"><span class="far fa-eye-slash"></span> <span>حذف یا عدم نمایش پیغام</span></button>
+                                </a>
+                            </div>
+                            <div id="hints">
+                                <h4><span class="far fa-exclamation-circle"></span> نکات مهم</h4>
+                                <li>بعد از ارسال پیغام بر روی سایت و مشاهده کاربر تا 72 ساعت نمی توان پیغام ارسال کرد، چون زمان انقضای هر پیغام در کوکی 72 ساعت است، <strong>بعد از اتمام زمان میتوانید پیغام جدید را ثبت کنید، همچنین امکان ارسال چند پیغام در یک پیغام هم وجود دارد (بعد از گذشت زمان) ولی پیشنهاد میشود ابتدا پیغام قبلی را حذف (دکمه حذف یا عدم نمایش پیغام) و بعد پیغام جدید تکی را ثبت کنید، درضمن بعد از گذشت زمان 72 ساعت پیغام را باید بصورت دستی حذف یا عدم نمایش آن  را فعال کنید در غیر این صورت پیغام ممکن است کاربر را خسته کند.</strong></li>
+                                <li>برای غیرفعال کردن سرویس پیغام و همچنین حذف تمامی پیغام ها کافیه روی دکمه <strong><span class="far fa-eye-slash" style="margin: 0;"></span> حذف یا عدم نمایش پیغام</strong> کلیک کنید.</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION SHOW FILES UPLOADED -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="show-files-uploaded-title">فایلها</h3>
+                </div>
+                <div>
+                    <a href="javascript:modalUploadFileFunc()"><button class="btn-main"><span class="far fa-upload"></span> بارگذاری فایل</button></a>
+                    <a href="{{ url_for('admin_files') }}"><button class="btn-main"><span class="far fa-files"></span> فایلها</button></a>
+                </div>
+
+                <!-- MODALS -->
+                <!-- MODAL: UPLOAD FILE -->
+                <div class="modal-overlay" id="modalUploadFile">
+                    <i onclick="modalUploadFileFunc()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalUploadFileFunc()"></div>
+                        <div class="modal-header">
+                            <h4>بارگذاری فایل</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/upload_file/" method="post" enctype="multipart/form-data">
+                                <input type="file" name="uploadFile" id="uploadFile" placeholder="بارگذاری فایل" aria-placeholder="بارگذاری فایل" aria-label="بارگذاری فایل" required>
+                                <input type="submit" value="بارگذاری" aria-label="بارگذاری">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION TABLE USERS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="users-title">لیست کاربران</h3>
+                    <a href="{{url_for('admin_users')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>نام کاربری</li>
+                        <li>ایمیل</li>
+                        <li>رمز عبور</li>
+                        <li>تاریخ ثبت نام</li>
+                    </div>
+                    {% for user in users[0:8] %}
+                        <div class="table-body table-body-users">
+                            <li>{{user[0]}}</li>
+                            <li>{{user[1]}}</li>
+                            <li>{{user[2]}}</li>
+                            <li>{{user[3]}}</li>
+                            <li>{{user[4]}}</li>
+                            
+                            {% if user[2] == email_admin %}
+                                <div class="badge-status badge-status-green" title="مدیر"></div>
+                            {% elif user[1] == "root" %}
+                                <div class="badge-status badge-status-red" title="مدیر کامل"></div>
+                            {% else %}
+                                <div class="badge-status badge-status-blue" title="کاربر"></div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION TABLE COMMENTS -->
+            <section class="section-content">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="comments-title">نظرات کاربران</h3>
+                        <a href="{{url_for('admin_comments')}}">
+                            <span>مشاهده بیشتر</span>
+                            <span class="far fa-angle-right"></span>
+                        </a>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li>نام کاربری</li>
+                            <li>ایمیل</li>
+                            <li>شماره تماس</li>
+                            <li>پیام</li>
+                            <li>تاریخ ارسال</li>
+                        </div>
+                        {% for comment in comments[0:8] %}
+                            <div class="table-body table-body-comments">
+                                <li>{{comment[0]}}</li>
+                                <li>{{comment[1]}}</li>
+                                <li>{{comment[2]}}</li>
+                                <li>{{comment[3]}}</li>
+                                <input type="text" id="tableBodyComments" value="{{comment[4]}}" title="{{comment[4]}}">
+                                <li>{{comment[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION TECHNOLOGIST -->
+            <section class="section-content section-technologist">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="id-card-title">آگهی های ارسال شده</h3>
+                    <a href="{{url_for('admin_technologist')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <!-- <li>ردیف</li> -->
+                        <li>نام و نام خانوادگی</li>
+                        <li>عنوان شغل</li>
+                        <li>عنوان آگهی</li>
+                        <li>ایمیل</li>
+                        <li>شماره تماس</li>
+                        <li>دسته بندی</li>
+                        <li>آدرس محل کار</li>
+                        <li>توضیحات</li>
+                        <li>تاریخ ثبت درخواست</li>
+                    </div>
+                    {% for technologist in cursor_technologist_show[0:8] %}
+                        <div class="table-body table-body-comments">
+                            <!-- <li>{{technologist[0]}}</li> -->
+                            <li>{{technologist[1]}}</li>
+                            <li title="{{technologist[2]}}">{{technologist[2]}}</li>
+                            <li>{{technologist[3]}}</li>
+                            <li><a href="mailto:{{technologist[4]}}">{{technologist[4]}}</a></li>
+                            <li><a href="tel:{{technologist[5]}}">{{technologist[5]}}</a></li>
+                            <li>{{technologist[6]}}</li>
+                            <li title="{{technologist[7]}}">{{technologist[7]}}</li>
+                            <li title="{{technologist[8]}}">{{technologist[8]}}</li>
+                            <li>{{technologist[9]}}</li>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION EVENTS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="events-title">رویدادها</h3>
+                    <a href="{{url_for('admin_events')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>لینک تصویر</li>
+                        <li>عنوان رویداد</li>
+                        <li>توضیحات مختصر رویداد</li>
+                        <li>لینک رویداد</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% for event in cursor_events_show[0:8] %}
+                        <div class="table-body table-body-users">
+                            <li>{{event[0]}}</li>
+                            <li><a href="{{event[1]}}">{{event[1]}}</a></li>
+                            <li title="{{event[2]}}">{{event[2]}}</li>
+                            <li title="{{event[3]}}">{{event[3]}}</li>
+                            <li style="white-space: nowrap;"><a href="{{event[4]}}" target="_blank">{{event[4]}}</a></li>
+                            <li>{{event[5]}}</li>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION SITES -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="sites-title">سامانه ها</h3>
+                    <a href="{{url_for('admin_sites')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>عنوان سامانه</li>
+                        <li>لینک سامانه</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% for site in cursor_sites_show[0:8] %}
+                        <div class="table-body table-body-users">
+                            <li>{{site[0]}}</li>
+                            <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[1]}}</a></li>
+                            <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[2]}}</a></li>
+                            <li>{{site[3]}}</li>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION PUBLISHERS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="publishers-title">جزوه ها</h3>
+                    <a href="{{url_for('admin_publishers')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>عنوان رشته، جزوه</li>
+                        <li>لینک فایل</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% for publisher in cursor_publishers_show[0:8] %}
+                        <div class="table-body table-body-users">
+                            <li>{{publisher[0]}}</li>
+                            <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[1]}}</a></li>
+                            <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[2]}}</a></li>
+                            <li>{{publisher[3]}}</li>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION TICKET -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="ticket-title">تیکت ها</h3>
+                    <a href="{{url_for('admin_ticket')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>نام و نام خانوادگی</li>
+                        <li>موضوع تیکت</li>
+                        <li>متن تیکت</li>
+                        <li>ایمیل</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% for ticket in cursor_ticket_show[0:8] %}
+                        <div class="table-body table-body-users">
+                            <li>{{ticket[1]}}</li>
+                            <li title="{{ticket[2]}}">{{ticket[2]}}</li>
+                            <input type="text" id="tableBodyComments" value="{{ticket[4]}}" title="{{ticket[4]}}">
+                            <li><a href="mailto:{{ticket[3]}}">{{ticket[3]}}</a></li>
+                            <li>{{ticket[5]}}</li>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

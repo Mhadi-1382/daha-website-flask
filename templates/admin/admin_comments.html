@@ -1,0 +1,80 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > نظرات کاربران - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- NUMBER USERS -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_comments }} نظر</h4>
+                            <p>مشاهده نظرات کاربران</p>
+                        </div>
+                        <li class="far fa-comments comments-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION TABLE COMMENTS -->
+            <section class="section-content">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="comments-title">نظرات کاربران</h3>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li>نام کاربری</li>
+                            <li>ایمیل</li>
+                            <li>شماره تماس</li>
+                            <li>پیام</li>
+                            <li>تاریخ ارسال</li>
+                            <li></li>
+                        </div>
+                        {% if comments | length >= 1 %}
+                            {% for comment in comments %}
+                                <div class="table-body table-body-comments">
+                                    <li>{{comment[0]}}</li>
+                                    <li>{{comment[1]}}</li>
+                                    <li><a href="mailto:{{comment[2]}}">{{comment[2]}}</a></li>
+                                    <li><a href="tel:{{comment[3]}}">{{comment[3]}}</a></li>
+                                    <input type="text" id="tableBodyComments" value="{{comment[4]}}" title="{{comment[4]}}">
+                                    <li>{{comment[5]}}</li>
+
+                                    <form action="/delete_comments/{{comment[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

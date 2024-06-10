@@ -1,0 +1,44 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید جزوه های مربوط به درس های خود را دانلود نمایید.{% endblock des %}
+{% block key %}داها، انتشارات، انتشارات داها{% endblock key %}
+{% block title %}انتشارات - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- PUBLISHERS -->
+                <div class="publishers">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید جزوه های مربوط به درس های خود را دانلود نمایید.</p>
+                    </div>
+
+                    {% if cursor_publishers_show | length >= 1 %}
+                        {% for publish in cursor_publishers_show %}
+                            <a href="{{ publish[2] }}"><button class="btn-main"><li class="far fa-download"></li> <span>{{ publish[1] }}</span></button></a>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,52 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید به رویداد های (کنفرانسها، مسابقات، اخبار و ...) اخیر دانشکده دسترسی داشته باشید.{% endblock des %}
+{% block key %}داها، رویداد ها، رویداد ها داها{% endblock key %}
+{% block title %}رویداد ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- EVENTS -->
+                <div class="events">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید به رویداد های (کنفرانسها، مسابقات، اخبار و ...) اخیر دانشکده دسترسی داشته باشید.</p>
+                    </div>
+
+                    <div class="grid-events">
+                        {% if cursor_events_show | length >= 1 %}
+                            {% for event in cursor_events_show %}
+                                <a href="{{event[4]}}" class="card-events">
+                                    <figure>
+                                        <img src="{{event[1]}}" alt="{{event[2]}}" loading="lazy">
+                                    </figure>
+                                    <h4>{{event[2]}}</h4>
+                                    <p>{{event[3]}}</p>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

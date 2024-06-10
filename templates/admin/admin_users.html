@@ -1,0 +1,90 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > لیست کاربران - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- NUMBER USERS -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_users }} کاربر</h4>
+                            <p>مشاهده لیست کاربران</p>
+                        </div>
+                        <li class="far fa-users users-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION TABLE USERS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="users-title">لیست کاربران</h3>
+                </div>
+                
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>نام کاربری</li>
+                        <li>ایمیل</li>
+                        <li>رمز عبور</li>
+                        <li>تاریخ ثبت نام</li>
+                        <li></li>
+                    </div>
+                    {% if users | length >= 1 %}
+                        {% for user in users %}
+                            <div class="table-body table-body-users">
+                                <li>{{user[0]}}</li>
+                                <li>{{user[1]}}</li>
+                                <li><a href="mailto:{{user[2]}}">{{user[2]}}</a></li>
+                                <li>{{user[3]}}</li>
+                                <li>{{user[4]}}</li>
+                                
+                                {% if user[2] == email_admin %}
+                                    <div class="badge-status badge-status-green" title="مدیر"></div>
+                                {% elif user[1] == "root" %}
+                                    <div class="badge-status badge-status-red" title="مدیر کامل"></div>
+                                {% else %}
+                                    <div class="badge-status badge-status-blue" title="کاربر"></div>
+                                {% endif %}
+
+                                {% if user[2] == email_admin or user[1] == "root" %}
+                                    <form>
+                                        <button type="button" title="قفل شده است"><span class="far fa-lock-keyhole"></span></button>
+                                    </form>
+                                {% else %}
+                                    <form action="/delete_users/{{user[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}

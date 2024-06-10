@@ -1,0 +1,14 @@
+
+<!-- NAVBAR MOBILE -->
+<div class="navbar-mobile">
+    <!-- BUTTON MENUBAR -->
+    <li class="far fa-bars" onclick="toggleNavbarMobile()" title="منو"></li>
+
+    <!-- LOGO -->
+    <a href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='media/images/daha_logo.svg') }}" alt="داها" id="dahaLogoForLightMobile" width="50" draggable="false">
+        <img src="{{ url_for('static', filename='media/images/daha_logo_light.svg') }}" alt="داها" id="dahaLogoForDarkMobile" width="50" draggable="false" style="display: none;">
+    </a>
+
+    <li style="padding: 10px 15px;"></li>
+</div>

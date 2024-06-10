@@ -1,0 +1,73 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید چارت درسی مربوط به رشته خود را دانلود نمایید.{% endblock des %}
+{% block key %}داها، رشته ها، رشته ها داها{% endblock key %}
+{% block title %}رشته ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- MAJORS -->
+                <div class="majors">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید چارت درسی مربوط به رشته خود را دانلود نمایید.</p>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <a href="javascript:associateDegree()"><button class="btn-main"><span>مقطع کاردانی</span> <li class="far fa-angle-down" id="associateDegreeBtnAngleDown"></li><li class="far fa-angle-up" id="associateDegreeBtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="majorsCard1">
+                        <p>مکانیک خودرو</p>
+                        <div>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2023123076065108595896.pdf"><li class="far fa-download"></li> <p>مکانیک خودرو پیوسته 324</p></a>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2023083330265692561573.pdf"><li class="far fa-download"></li> <p>مکانیک ماشین های صنعتی ناپیوسته 405</p></a>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2023121868014738595811.pdf"><li class="far fa-download"></li> <p>تعمیر و نگهداری خودرو ناپیوسته 253</p></a>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2022013017874788417925.pdf"><li class="far fa-download"></li> <p>مکانیک صنایع (ماشین آلات صنایع) ناپیوسته 143</p></a>
+                        </div>
+                        
+                        <p>الکترونیک</p>
+                        <div>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2022011574419334417931.pdf"><li class="far fa-download"></li> <p>الکترونیک ابزار دقیق ناپیوسته 201</p></a>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2023121095851056595817.pdf"><li class="far fa-download"></li> <p>الکترونیک پیوسته 301</p></a>
+                            <a href="https://p-amol.tvu.ac.ir/file/131/attach2024014268679632608235.pdf"><li class="far fa-download"></li> <p>الکتروتکنیک پیوسته 300</p></a>
+                        </div>
+
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022014016314958417929.pdf"><li class="far fa-download"></li> <p>ساخت و تولید پیوسته 317</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023123624079646595912.pdf"><li class="far fa-download"></li> <p>معماری داخلی پیوسته 304</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023122815149242595894.pdf"><li class="far fa-download"></li> <p>تربیت بدنی پیوسته 306</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023122282060284595846.pdf"><li class="far fa-download"></li> <p>عمران پیوسته 303</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2024021803004890613026.pdf"><li class="far fa-download"></li> <p>کامپیوتر پیوسته 302</p></a>
+                    </div>
+
+                    <a href="javascript:undergraduate()"><button class="btn-main"><span>مقطع کارشناسی</span> <li class="far fa-angle-down" id="undergraduateBtnAngleDown"></li><li class="far fa-angle-up" id="undergraduateBtnAngleUp" style="display: none;"></li></button></a>
+                    <div class="majors-card" id="majorsCard2">
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023123053433738595899.pdf"><li class="far fa-download"></li> <p>مهندسی حرفه ای مکانیک خودرو ناپیوسته 707</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022011563878578417563.pdf"><li class="far fa-download"></li> <p>مهندسی تکنولوژی مکانیک خودرو ناپیوسته 183</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022012740362408421413.pdf"><li class="far fa-download"></li> <p>مهندسی حرفه ای ساخت و تولید ناپیوسته 703</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022014190245412417327.pdf"><li class="far fa-download"></li> <p>مهندسی تکنولوژی ساخت و تولید قالبسازی ناپیوسته 156</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023123183544678595898.pdf"><li class="far fa-download"></li> <p>مهندسی حرفه ای الکترونیک کاربردی ناپیوسته 714</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022012121144802417340.pdf"><li class="far fa-download"></li> <p>مهندسی تکنولوژی الکترونیک کاربردی ناپیوسته 212</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2023123247632414597220.pdf"><li class="far fa-download"></li> <p>مهندسی حرفه ای معماری پیوسته 906</p></a>
+                        <a href="https://p-amol.tvu.ac.ir/file/131/attach2022011626701360417351.pdf"><li class="far fa-download"></li> <p>مهندسی معماری پیوسته 340</p></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

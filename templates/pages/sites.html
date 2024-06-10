@@ -1,0 +1,45 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید بصورت مستقیم به سایت دانشکده و سامانه های مورد نیاز دسترسی داشته باشید.{% endblock des %}
+{% block key %}داها، سامانه ها، سامانه ها داها{% endblock key %}
+{% block title %}سامانه ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left-2">
+                <!-- SITES -->
+                <div class="sites">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید بصورت مستقیم به سایت دانشکده و سامانه های مورد نیاز دسترسی داشته باشید.</p>
+                    </div>
+
+                    <!-- BUTTON -->
+                    {% if cursor_sites_show | length >= 1 %}
+                        {% for sites in cursor_sites_show %}
+                            <a href="{{sites[2]}}"><button class="btn-main"><li class="far fa-globe"></li> <span>{{sites[1]}}</span></button></a>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </aside>
+    </div>
+
+{% endblock body %}

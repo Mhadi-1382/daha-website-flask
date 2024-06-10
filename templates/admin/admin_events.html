@@ -1,0 +1,80 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > رویداد ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW EVENTS -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_events }} رویداد</h4>
+                            <p>مشاهده تمام رویداد ها</p>
+                        </div>
+                        <li class="far fa-calendar-check events-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION EVENTS -->
+            <section class="section-content">
+                <div class="table-container">
+                    <!-- TITLE HEADER -->
+                    <div class="title-header">
+                        <h3 class="events-title">رویداد ها</h3>
+                    </div>
+
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li>لینک تصویر</li>
+                            <li>عنوان رویداد</li>
+                            <li>توضیحات مختصر رویداد</li>
+                            <li>لینک رویداد</li>
+                            <li>تاریخ ثبت</li>
+                            <li></li>
+                        </div>
+                        {% if cursor_events_show | length >= 1 %}
+                            {% for event in cursor_events_show %}
+                                <div class="table-body table-body-users">
+                                    <li>{{event[0]}}</li>
+                                    <li><a href="{{event[1]}}">{{event[1]}}</a></li>
+                                    <li title="{{event[2]}}">{{event[2]}}</li>
+                                    <li title="{{event[3]}}">{{event[3]}}</li>
+                                    <li style="white-space: nowrap;"><a href="{{event[4]}}" target="_blank">{{event[4]}}</a></li>
+                                    <li>{{event[5]}}</li>
+
+                                    <form action="/delete_events/{{event[0]}}" method="post">
+                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+{% endblock body %}
