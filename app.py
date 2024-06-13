@@ -35,11 +35,6 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'DahaDB'
-# app.config['MYSQL_HOST'] = os.getenv('DB_HOST', 'services.irn3.chabokan.net')
-# app.config['MYSQL_USER'] = os.getenv('DB_USER', 'flask514_eric')
-# app.config['MYSQL_PASSWORD'] = os.getenv('DB_PASSWORD', 'peSaB65R4fOR')
-# app.config['MYSQL_DB'] = os.getenv('DB_NAME', 'flask514_eric')
-# app.config['MYSQL_PORT'] = int(os.getenv('DB_PORT', 55063))
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=15)
 app.config['SESSION_REFRESH_EACH_REQUEST'] = True
@@ -49,7 +44,7 @@ app.secret_key = os.urandom(24)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = f'{email_admin}'
-app.config['MAIL_PASSWORD'] = 'iimh fvtd ijco lrae'
+app.config['MAIL_PASSWORD'] = ''
 app.config['MAIL_DEFAULT_SENDER'] = f'{email_admin}'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
