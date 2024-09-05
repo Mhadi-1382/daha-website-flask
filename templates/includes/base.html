@@ -12,16 +12,35 @@
         <!-- IMPORT CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <!-- IMPORT FONTAWESOME CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='fonts/css/fontawesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='fonts/css/all.min.css') }}">
          
         <!-- FAVICON -->
         <link rel="shortcut icon" href="{{ url_for('static', filename='media/images/icon.svg') }}" type="image/x-icon">
 
         <!-- IMPORT MANIFEST -->
-        <link rel="manifest" href="/manifest.json">
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 
         <!-- TITLE -->
         <title>{% block title %} {% endblock title %}</title>
+        
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+        <script>
+            // SERVICE WORKER/MANIFEST
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}");
+                });
+            }
+
+            // CONFIG NOTIFY
+            const beamsClient = new PusherPushNotifications.Client({
+                instanceId: '',
+            });
+            beamsClient.start()
+            .then(() => beamsClient.addDeviceInterest('daha'))
+            .then(() => console.log('Successfully registered and subscribed!'))
+            .catch(console.error);
+        </script>
     </head>
     <body>
 

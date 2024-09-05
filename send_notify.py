@@ -1,35 +1,31 @@
 
-import requests
+'''
+API CONNECTION TO NOTIFICATIONS.
+'''
 
-TOKEN = '21b1354772f837c04fea55c5b7149b6b7d1f626b'
-APP_ID = 'uni.treasure.wasal'
+from pusher_push_notifications import PushNotifications
 
-def config_notify(title, content, image):
-    # set header
-    headers = {
-        'Authorization': 'Token ' + TOKEN,
-        'Content-Type': 'application/json'
-    }
+INSTANCE_ID = ''
+SECRET_KEY = ''
 
-    # data & config
-    data = {
-        'app_ids': [APP_ID,],
-        'data': {
-            'title': f'{title}',
-            'content': f'{content}',
-
-            'wake_screen': True,
-            'action': {
-                'action_type': 'A',
-                'url': '',
-            },
-            'image': f'{image}',
-        },
-    }
-
-    # send request
-    requests.post(
-        'https://api.push-pole.com/v2/messaging/notifications/',
-        json=data,
-        headers=headers,
+def config_notify(title, content, icon, link):
+    beams_client = PushNotifications(
+        instance_id=INSTANCE_ID,
+        secret_key=SECRET_KEY,
     )
+    
+    response = beams_client.publish_to_interests(
+      interests=['daha'],
+      publish_body={
+        'web': {
+          'notification': {
+            'title': f'{title}',
+            'body': f'{content}',
+            'icon': f'{icon}',
+            'deep_link': f'{link}',
+          },
+        },
+      },
+    )
+    
+    print(response['publishId'])

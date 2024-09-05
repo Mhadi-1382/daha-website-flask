@@ -1,0 +1,18 @@
+
+{% extends 'includes/base.html' %}
+
+{% block title %}خطای سرور داخلی - داها{% endblock title %}
+
+
+{% block body %}
+
+    <!-- SECTION 500 -->
+    <section class="section-404">
+        <h1>500</h1>
+        <p>خطای سرور داخلی</p>
+        <a href="{{url_for('index')}}">
+            <button class="btn-main">بازگشت به خانه</button>
+        </a>
+    </section>
+
+{% endblock body %}

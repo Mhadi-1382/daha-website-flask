@@ -2,30 +2,46 @@
 /*!
  * DAHA Template
  * Created on date: 1402/12/02
- * Built on date: 1403/01/28
+ * Built on date: 1403/04/13
  * 
  * View source code on GitHub: https://github.com/Mhadi-1382/daha-website-flask
 */
 
-
+// SPLASH SCREEN
 window.addEventListener("load", function() {
-    // SPLASH SCREEN
     setTimeout(() => {
         document.getElementById("splashScreen").remove("splash-screen");
     }, 1000);
 
     // STATUS INTERNET
-    if (navigator.onLine) {
-        console.log("Online.");
-    } else {
-        console.log("Offline.");
+    // if (navigator.onLine) {
+    //     console.log("Online.");
+    // } else {
+    //     console.log("Offline.");
+    
+    //     setTimeout(() => {
+    //         var AlertOfflineMode = document.getElementById("AlertOfflineMode");
+    //         AlertOfflineMode.style.display = "flex";
+    //         navigator.vibrate(200);
+    //     }, 1000);
+    // }
+});
 
-        // setTimeout(() => {
-        //     var AlertOfflineMode = document.getElementById("AlertOfflineMode");
-        //     AlertOfflineMode.style.display = "flex";
-        //     navigator.vibrate(200);
-        // }, 1000);
-    }
+
+// STATUS INTERNET
+var AlertOfflineMode = document.getElementById("AlertOfflineMode");
+window.addEventListener("offline", function() {
+    console.log("Offline.");
+    
+    setTimeout(() => {
+        AlertOfflineMode.style.display = "flex";
+        navigator.vibrate(200);
+    }, 1000);
+});
+window.addEventListener("online", function() {
+    console.log("Online.");
+    
+    AlertOfflineMode.style.display = "none";
 });
 
 
@@ -59,12 +75,21 @@ window.onload = function() {
 }
 
 
-// NAVBAR MOBILE
+// NAVBAR MOBILE & MODALS
 var navbarMobileSidebarRight = document.getElementById("navbarMobileSidebarRight");
 var sidebarRight = document.getElementById("sidebarRight");
+var actionButton = document.getElementById("actionButton");
+var actionLinkClickToggle = document.getElementById("actionLinkClickToggle");
 function toggleNavbarMobile() {
     navbarMobileSidebarRight.classList.toggle("navbar-mobile-toggle");
     sidebarRight.classList.toggle("sidebar-right-navbar-toggle");
+    if (actionButton) {
+        actionButton.classList.toggle("action-button-toggle");
+        // sidebarRight.scrollTo({top: 0, behavior: "smooth"});
+    } else {
+    }
+
+    actionLinkClickToggle.classList.toggle("action-link-click-toggle");
 }
 
 var dropdownUserAvatarWarpper = document.getElementById("dropdownUserAvatarWarpper");
@@ -80,26 +105,29 @@ function modalEditInfoFunc() {
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 function modalStatusAdFunc() {
     modalStatusAd.classList.toggle("modal-toggle");
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 function modalDeleteAccountFunc() {
     modalDeleteAccount.classList.toggle("modal-toggle");
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 function modalHelpAdminFunc() {
     modalHelpAdmin.classList.toggle("modal-toggle");
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
-
 
 // MODALS
 var modalSupport = document.getElementById("modalSupport");
@@ -108,6 +136,7 @@ function modalSupportFunc() {
     
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 var modalAbout = document.getElementById("modalAbout");
 function modalAboutFunc() {
@@ -115,6 +144,7 @@ function modalAboutFunc() {
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 var modalComment = document.getElementById("modalComment");
 function modalCommentFunc() {
@@ -122,6 +152,7 @@ function modalCommentFunc() {
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
 }
 var modalTicket = document.getElementById("modalTicket");
 function modalTicketFunc() {
@@ -130,6 +161,27 @@ function modalTicketFunc() {
 
     navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
     sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
+}
+var modalVersionChanges = document.getElementById("modalVersionChanges");
+function modalVersionChangesFunc() {
+    modalVersionChanges.classList.toggle("modal-toggle");
+
+    navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
+    sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
+}
+var modalPrivacyPolicies = document.getElementById("modalPrivacyPolicies");
+function modalPrivacyPoliciesFunc() {
+    modalPrivacyPolicies.classList.toggle("modal-toggle");
+
+    navbarMobileSidebarRight.classList.remove("navbar-mobile-toggle");
+    sidebarRight.classList.remove("sidebar-right-navbar-toggle");
+    actionLinkClickToggle.classList.remove("action-link-click-toggle");
+}
+var modalNotifications = document.getElementById("modalNotifications");
+function modalNotificationsFunc() {
+    modalNotifications.classList.toggle("modal-toggle");
 }
 var modalPossibilities1 = document.getElementById("modalPossibilities1");
 function modalPossibilities1Func() {
@@ -166,6 +218,10 @@ function modalTechnologistFunc() {
 var modalUploadFile = document.getElementById("modalUploadFile");
 function modalUploadFileFunc() {
     modalUploadFile.classList.toggle("modal-toggle");
+}
+var modalDahaVoiceAssistant = document.getElementById("modalDahaVoiceAssistant");
+function modalDahaVoiceAssistantFunc() {
+    modalDahaVoiceAssistant.classList.toggle("modal-toggle");
 }
 
 
@@ -243,7 +299,7 @@ var dahaLogoForLightMobile = document.getElementById("dahaLogoForLightMobile");
 var toggleModeTextMoon = document.getElementById("toggleModeTextMoon");
 var toggleModeTextSun = document.getElementById("toggleModeTextSun");
 function toggleThemeModeDark() {
-    localStorage.setItem("toggleThemeMode", "dark");
+    localStorage.setItem("ToggleThemeMode", "dark");
 
     document.body.classList.toggle("toggleMode");
 
@@ -256,7 +312,7 @@ function toggleThemeModeDark() {
     toggleModeTextSun.classList.toggle("btn-angle-up");
 }
 function toggleThemeModelight() {
-    localStorage.setItem("toggleThemeMode", "light");
+    localStorage.setItem("ToggleThemeMode", "light");
 
     document.body.classList.toggle("toggleMode");
 
@@ -268,7 +324,7 @@ function toggleThemeModelight() {
     toggleModeTextMoon.classList.toggle("btn-angle-down");
     toggleModeTextSun.classList.remove("btn-angle-up");
 }
-if (localStorage.getItem("toggleThemeMode") == "dark") {
+if (localStorage.getItem("ToggleThemeMode") == "dark") {
     document.body.classList.add("toggleMode");
 
     dahaLogoForDark.classList.toggle("btn-angle-up");
@@ -278,6 +334,28 @@ if (localStorage.getItem("toggleThemeMode") == "dark") {
     
     toggleModeTextMoon.classList.add("btn-angle-down");
     toggleModeTextSun.classList.toggle("btn-angle-up");
-} else if (localStorage.getItem("toggleThemeMode") == "light") {
+} else if (localStorage.getItem("ToggleThemeMode") == "light") {
     document.body.classList.remove("toggleMode");
+}
+
+
+// GROUP TABS
+var groupTabsContent1 = document.getElementById("groupTabsContent1");
+var groupTabsContent2 = document.getElementById("groupTabsContent2");
+var groupTabsActive1 = document.querySelector(".group-tabs .tab-actived1");
+var groupTabsActive2 = document.querySelector(".group-tabs .tab-actived2");
+
+function groupTabsFunc1() {
+    groupTabsContent1.style.display = "flex";
+    groupTabsContent2.style.display = "none";
+
+    groupTabsActive1.classList.add("tab-active");
+    groupTabsActive2.classList.remove("tab-active");
+}
+function groupTabsFunc2() {
+    groupTabsContent1.style.display = "none";
+    groupTabsContent2.style.display = "flex";
+
+    groupTabsActive1.classList.remove("tab-active");
+    groupTabsActive2.classList.add("tab-active");
 }

@@ -3,7 +3,7 @@
 
 {% block des %}داها{% endblock des %}
 {% block key %}داها{% endblock key %}
-{% block title %}داشبورد مدیر > لیست کاربران - داها{% endblock title %}
+{% block title %}داشبورد مدیر > لیست کاربران و اساتید - داها{% endblock title %}
 
 
 {% block body %}
@@ -17,25 +17,40 @@
 
         </aside>
         <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
             <div class="background-image">
                 {% include 'includes/navbar_mobile.html' %}
             </div>
             <div class="grid-sidebar-left" style="top: -50px;">
                 <!-- NUMBER USERS -->
-                <div class="card-info" style="height: 85px;">
-                    <div class="card-info-body">
-                        <div>
-                            <h4>{{ number_users }} کاربر</h4>
-                            <p>مشاهده لیست کاربران</p>
+                <a href="#numberUsers">
+                    <div class="card-info" style="height: 85px;">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_users }} کاربر</h4>
+                                <p>مشاهده لیست کاربران</p>
+                            </div>
+                            <li class="far fa-users users-icon"></li>
                         </div>
-                        <li class="far fa-users users-icon"></li>
                     </div>
-                </div>
+                </a>
+                <!-- NUMBER TEACHERS -->
+                <a href="#numberTeachers">
+                    <div class="card-info" style="height: 85px;">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_teachers }} استاد</h4>
+                                <p>مشاهده لیست اساتید</p>
+                            </div>
+                            <li class="far fa-users users-icon"></li>
+                        </div>
+                    </div>
+                </a>
             </div>
 
             <!-- SECTION CONTENT -->
             <!-- SECTION TABLE USERS -->
-            <section class="section-content">
+            <section class="section-content" id="numberUsers">
                 <!-- TITLE HEADER -->
                 <div class="title-header">
                     <h3 class="users-title">لیست کاربران</h3>
@@ -49,7 +64,12 @@
                         <li>ایمیل</li>
                         <li>رمز عبور</li>
                         <li>تاریخ ثبت نام</li>
-                        <li></li>
+
+                        <li class="form-toolbox-li">
+                            <form action="" method="post" class="form-toolbox">
+                                <button type="submit" title="حذف" class="badge" disabled><span class="far fa-trash"></span></button>
+                            </form>
+                        </li>
                     </div>
                     {% if users | length >= 1 %}
                         {% for user in users %}
@@ -69,14 +89,76 @@
                                 {% endif %}
 
                                 {% if user[2] == email_admin or user[1] == "root" %}
-                                    <form>
-                                        <button type="button" title="قفل شده است"><span class="far fa-lock-keyhole"></span></button>
-                                    </form>
+                                    <li class="form-toolbox-li">
+                                        <form class="form-toolbox">
+                                            <button type="button" title="قفل شده است" class="badge badge-silver"><span class="far fa-lock-keyhole"></span></button>
+                                        </form>
+                                    </li>
                                 {% else %}
-                                    <form action="/delete_users/{{user[0]}}" method="post">
-                                        <button type="submit" title="حذف"><span class="far fa-trash"></span></button>
-                                    </form>
+                                    <li class="form-toolbox-li">
+                                        <form action="/delete_users/{{user[0]}}" method="post" class="form-toolbox">
+                                            <button type="submit" title="حذف" class="badge badge-red"><span class="far fa-trash"></span></button>
+                                        </form>
+                                    </li>
                                 {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- SECTION TEACHERS -->
+            <section class="section-content" id="numberTeachers">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="users-title">لیست اساتید</h3>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>نام و نام خانوادگی</li>
+                        <li>ایمیل</li>
+                        <li>رمز عبور</li>
+                        <li>شماره همراه</li>
+                        <li>کد ملی</li>
+                        <li>کد امنیتی</li>
+                        <li>تاریخ ثبت نام</li>
+
+                        <li class="form-toolbox-li">
+                            <form action="" method="post" class="form-toolbox">
+                                <button type="submit" title="تایید" class="badge" disabled><span class="far fa-check"></span></button>
+                            </form>
+                            <form action="" method="post" class="form-toolbox">
+                                <button type="submit" title="حذف" class="badge" disabled><span class="far fa-trash"></span></button>
+                            </form>
+                        </li>
+                    </div>
+                    {% if cursor_teachers_show | length >= 1 %}
+                        {% for teachers in cursor_teachers_show %}
+                            <div class="table-body table-body-users">
+                                <li>{{teachers[0]}}</li>
+                                <li>{{teachers[1]}}</li>
+                                <li><a href="mailto:{{teachers[2]}}">{{teachers[2]}}</a></li>
+                                <li>{{teachers[3]}}</li>
+                                <li><a href="tel:{{teachers[4]}}">{{teachers[4]}}</a></li>
+                                <li>{{teachers[5]}}</li>
+                                <li>{{teachers[6]}}</li>
+                                <li>{{teachers[7]}}</li>
+
+                                <div class="badge-status badge-status-blue" title="کاربر"></div>
+
+                                <li class="form-toolbox-li">
+                                    <form action="/accept_teacher/{{teachers[0]}}" method="post" class="form-toolbox">
+                                        <button type="submit" title="تایید" class="badge badge-green"><span class="far fa-check"></span></button>
+                                    </form>
+                                    <form action="/delete_teacher/{{teachers[0]}}" method="post" class="form-toolbox">
+                                        <button type="submit" title="حذف" class="badge badge-red"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </li>
                             </div>
                         {% endfor %}
                     {% else %}
@@ -86,5 +168,24 @@
             </section>
         </aside>
     </div>
+
+    <style>
+        .table-container li.form-toolbox-li {
+            width: 50px;
+            display: flex;
+            overflow: visible;
+            align-items: center;
+            justify-content: center;
+        }
+        form.form-toolbox {
+            margin: auto;
+            display: flex;
+            margin-left: 3px;
+            align-items: center;
+        }
+        form.form-toolbox button .far {
+            margin: 0;
+        }
+    </style>
 
 {% endblock body %}

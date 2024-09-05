@@ -1,0 +1,105 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}داها{% endblock des %}
+{% block key %}داها{% endblock key %}
+{% block title %}داشبورد مدیر > نوتیفیکیشن ها - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
+            <div class="background-image">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left" style="top: -50px;">
+                <!-- SHOW NOTIFICATIONS -->
+                <div class="card-info" style="height: 85px;">
+                    <div class="card-info-body">
+                        <div>
+                            <h4>{{ number_notifications }} نوتیفیکیشن</h4>
+                            <p>مشاهده تمام نوتیفیکیشن ها</p>
+                        </div>
+                        <li class="far fa-bell notifications-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION NOTIFICATIONS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="notifications-title">نوتیفیکیشن ها</h3>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>ردیف</li>
+                        <li>آیکون</li>
+                        <li>موضوع نوتیفیکیشن</li>
+                        <li>متن نوتیفیکیشن</li>
+                        <li>لینک نوتیفیکیشن</li>
+                        <li>تاریخ ثبت</li>
+                        
+                        <li class="form-toolbox-li">
+                            <form action="" method="post" class="form-toolbox">
+                                <button type="submit" title="حذف" class="badge" disabled><span class="far fa-trash"></span></button>
+                            </form>
+                        </li>
+                    </div>
+                    {% if cursor_notifications_show | length >= 1 %}
+                        {% for notifications in cursor_notifications_show %}
+                            <div class="table-body table-body-users">
+                                <li>{{notifications[0]}}</li>
+                                <li><img src="{{notifications[1]}}" alt="{{notifications[2]}}" title="{{notifications[2]}}" style="width: 25px; border-radius: 9999px;"></li>
+                                <li>{{notifications[2]}}</li>
+                                <li title="{{notifications[3]}}">{{notifications[3]}}</li>
+                                <li style="display: flex; align-items: center; justify-content: center;"><a href="{{notifications[4]}}" title="{{notifications[2]}}"><span class="far fa-external-link"></span></a></li>
+                                <li>{{notifications[5]}}</li>
+
+                                <li class="form-toolbox-li">
+                                    <form action="/delete_admin_notify/{{notifications[0]}}" method="post" class="form-toolbox">
+                                        <button type="submit" title="حذف" class="badge badge-red"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </aside>
+    </div>
+    
+    <style>
+        .table-container li.form-toolbox-li {
+            width: 50px;
+            display: flex;
+            overflow: visible;
+            align-items: center;
+            justify-content: center;
+        }
+        form.form-toolbox {
+            margin: auto;
+            display: flex;
+            margin-left: 3px;
+            align-items: center;
+        }
+        form.form-toolbox button .far {
+            margin: 0;
+        }
+    </style>
+
+{% endblock body %}

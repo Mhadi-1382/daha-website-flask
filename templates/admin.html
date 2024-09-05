@@ -17,6 +17,7 @@
 
         </aside>
         <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
             <div class="background-image">
                 {% include 'includes/navbar_mobile.html' %}
             </div>
@@ -26,8 +27,8 @@
                     <div class="card-info">
                         <div class="card-info-body">
                             <div>
-                                <h4>{{ number_users }} کاربر</h4>
-                                <p>مشاهده لیست کاربران</p>
+                                <h4>{{ number_users }} کاربر، {{ number_teachers }} استاد <span style="font-size: 12px;">= ({{ number_teachers + number_users }})</span></h4>
+                                <p>مشاهده لیست کاربران و اساتید</p>
                             </div>
                             <li class="far fa-users users-icon"></li>
                         </div>
@@ -56,7 +57,7 @@
                     <div class="card-info">
                         <div class="card-info-body">
                             <div>
-                                <h4>{{ number_technologists }} آگهی ارسال شده</h4>
+                                <h4 style="font-size: 1rem;">{{ number_technologists }} آگهی ارسال شده <span style="font-size: 12px;">(ثبت شده: {{ number_technologists_set }})</span></h4>
                                 <p>مشاهده تمام آگهی ها</p>
                             </div>
                             <li class="far fa-id-card technologists-icon"></li>
@@ -126,6 +127,51 @@
                         </div>
                     </div>
                 </a>
+                <!-- NUMBER TEACHERS NOTIFICATIONS -->
+                <a href="{{url_for('admin_teachers_notifications')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_teachers_notifications }} اعلان اساتید</h4>
+                                <p>مشاهده تمام اعلانات اساتید</p>
+                            </div>
+                            <li class="far fa-bells users-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER NOTIFICATIONS -->
+                <a href="{{url_for('admin_notify')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_notifications }} نوتیفیکیشن</h4>
+                                <p>مشاهده تمام نوتیفیکیشن ها</p>
+                            </div>
+                            <li class="far fa-bell notifications-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
+                <!-- NUMBER API -->
+                <a href="{{url_for('admin_api')}}">
+                    <div class="card-info">
+                        <div class="card-info-body">
+                            <div>
+                                <h4>{{ number_api }} توسعه دهنده</h4>
+                                <p>مشاهده تمام توسعه دهندگان</p>
+                            </div>
+                            <li class="far fa-code api-icon"></li>
+                        </div>
+                        <div class="card-info-footer">
+                            <p style="display: flex; align-items: center;"><span>مشاهده بیشتر</span> <span class="far fa-angle-right" style="margin-right: 5px;"></span></p>
+                        </div>
+                    </div>
+                </a>
             </div>
 
             <!-- SECTION CONTENT -->
@@ -158,9 +204,15 @@
                         <div class="modal-body">
                             <!-- FORM: PUBLISHERS 1 -->
                             <form action="/pages/publishers/" method="post">
-                                <input type="text" name="titleHandout" placeholder="عنوان رشته، جزوه" aria-placeholder="عنوان رشته، جزوه" aria-label="عنوان رشته، جزوه" required>
+                                <input type="text" name="titleHandout" placeholder="نام استاد، عنوان رشته، نام درس" aria-placeholder="نام استاد، عنوان رشته، نام درس" aria-label="نام استاد، عنوان رشته، نام درس" required>
                                 <input type="url" name="linkHandout" placeholder="لینک فایل" aria-placeholder="لینک فایل" aria-label="لینک فایل" required>
                                 <input type="submit" value="بارگذاری" aria-label="بارگذاری">
+
+                                <div id="hints">
+                                    <h4><span class="far fa-exclamation-circle"></span> توجه</h4>
+                                    <li>در قسمت اول (نام استاد، عنوان رشته، نام درس) سعی شود الگو ذکر شده رعایت شود.</li>
+                                    <li>مثال: محمد مهدی ربیعی، کامپیوتر، سیستم عامل</li>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -215,20 +267,61 @@
                             <!-- FORM: TECHNOLOGIST -->
                             <form action="/pages/technologist_set/" method="post" enctype="multipart/form-data">
                                 <input type="text" name="usernameTechnologist" placeholder="نام و نام خانوادگی" aria-placeholder="نام و نام خانوادگی" aria-label="نام و نام خانوادگی" required maxlength="100">
-                                <input type="text" name="titleTechnologist" placeholder="عنوان شغل" aria-placeholder="عنوان شغل" aria-label="عنوان شغل" required maxlength="200">
-                                <input type="text" name="titleJobTechnologist" placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-label="انتخاب عنوان آگهی، کارجو یا کسب و کار" required maxlength="30">
+                                <input type="text" name="titleTechnologist" placeholder="عنوان آگهی" aria-placeholder="عنوان آگهی" aria-label="عنوان آگهی" required maxlength="200">
+                                <input type="text" name="titleJobTechnologist" placeholder="انتخاب نوع آگهی (کارجو یا کسب و کار)" aria-placeholder="انتخاب نوع آگهی (کارجو یا کسب و کار)" aria-label="انتخاب نوع آگهی (کارجو یا کسب و کار)" required maxlength="30">
                                 <input type="email" name="emailTechnologist" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required maxlength="200">
                                 <input type="tel" name="phoneTechnologist" placeholder="شماره تماس" aria-placeholder="شماره تماس" aria-label="شماره تماس" required maxlength="15">
-                                <input type="text" name="categoryTechnologist" placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-label="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" required maxlength="100">
+                                <input type="text" name="categoryTechnologist" placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-label="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" required maxlength="100">
                                 <input type="text" name="addressTechnologist" id="addressTechnologist" placeholder="آدرس محل کار" aria-placeholder="آدرس محل کار" aria-label="آدرس محل کار" maxlength="500">
                                 <input type="text" name="desTechnologist" placeholder="توضیحات" aria-placeholder="توضیحات" aria-label="توضیحات" required maxlength="500">
-                                <div style="margin-bottom: 0 !important;">
-                                    <label for="dateExpir">تاریخ انقضا</label>
-                                    <input type="datetime" style="direction: ltr;" name="dateExpir" id="dateExpir" placeholder="1403-01-10 16:50" aria-placeholder="1403-01-10 16:50" aria-label="1403-01-10 16:50">
-                                </div>
                                 <div>
                                     <label for="fileUrlTechnologist">بارگذاری تصویر</label>
                                     <input type="url" name="fileUrlTechnologist" id="fileUrlTechnologist" placeholder="لینک تصویر" aria-placeholder="لینک تصویر" aria-label="لینک تصویر" required maxlength="1000">
+                                    
+                                    <div style="margin: 20px 0 0 0 !important;">
+                                        <label for="selectExpirTechnologist">انتخاب بسته</label>
+                                        <div class="select-expir-technologist-value" style="margin: 0 !important;">
+                                            <select id="selectExpirTechnologist" name="selectExpirTechnologist" aria-placeholder="انتخاب بسته" aria-label="انتخاب بسته" style="cursor: pointer;" required>
+                                                <option value="1" selected>پایه - 1 ماهه</option>
+                                                <!-- <option value="2">پیشرفته - 1 ماهه</option> -->
+                                            </select>
+                                            <span id="selectExpirTechnologistValue">{{ pricePackages[0] }}</span>
+                                        </div>
+                                        <li class="select-expir-technologist-li"><a href="" style="margin-top: 10px;border-bottom: 1px dashed;width: auto;font-size: 12px;">تعرفه و مقایسه بسته ها</a></li>
+                                    </div>
+
+                                    <style>
+                                        .select-expir-technologist-value span {
+                                            background-color: #fff;
+                                            border-radius: 9999px;
+                                            margin-top: 17.7px;
+                                            position: absolute;
+                                            padding: 1px 10px;
+                                            color: #555555;
+                                            font-size: 13px;
+                                            left: 30px;
+                                        }
+                                        .toggleMode .select-expir-technologist-value span {
+                                            background-color: #0b0b0b;
+                                        }
+
+                                        .select-expir-technologist-li a:hover {
+                                            transition: all 0.2s ease-in;
+                                            opacity: 50%;
+                                        }
+                                    </style>
+
+                                    <script>
+                                        var selectExpirTechnologist = document.getElementById('selectExpirTechnologist');
+                                        var selectExpirTechnologistValue = document.getElementById('selectExpirTechnologistValue');
+                                        selectExpirTechnologist.onclick = () => {
+                                            if (selectExpirTechnologist.value == '1') {
+                                                selectExpirTechnologistValue.innerHTML = '{{ pricePackages[0] }}';
+                                            } else if (selectExpirTechnologist.value == '2') {
+                                                selectExpirTechnologistValue.innerHTML = '{{ pricePackages[1] }}';
+                                            }
+                                        }
+                                    </script>
                                 </div>
                                 <input type="submit" value="افزودن" aria-label="افزودن"> 
                             </form>
@@ -260,7 +353,7 @@
                                     <li style="margin-bottom: 30px;">برای ایجاد فاصله بین خطوط در قسمت <strong>پیام شما</strong> می توانید از کلمه یا تگ <kbd title="<br>">br</kbd> به اینصورت <input type="text" value="<br>" readonly title="<br>" style="all: unset; width: 30px;"> استفاده کنید، به ازای هر br یک خط جدید ایجاد می شود.</li>
 
                                     <h4><span class="far fa-users"></span> ایمیل کاربران</h4>
-                                    <div class="table-container" style="height: 300px; overflow: auto;">
+                                    <div class="table-container" style="height: 250px; overflow: auto;">
                                         <div class="table-header" style="width: 100%;">
                                             <li style="list-style: none; padding: 0; margin: 0;">نام کاربری</li>
                                             <li style="list-style: none; padding: 0; margin: 0;">ایمیل</li>
@@ -288,16 +381,18 @@
                         <div class="modal-body">
                             <!-- FORM: SEND NOTIFY -->
                             <form action="/admin/admin_send_notify/" method="post">
-                                <input type="url" name="notifyUrlImage" placeholder="آدرس تصویر" aria-placeholder="آدرس تصویر" aria-label="آدرس تصویر">
-                                <input type="text" name="notifySubject" placeholder="موضوع نوتیفیکیشن" aria-placeholder="موضوع نوتیفیکیشن" aria-label="موضوع نوتیفیکیشن" required>
+                                <input type="url" name="notifyUrlIcon" placeholder="آدرس آیکون" aria-placeholder="آدرس آیکون" aria-label="آدرس آیکون" value="https://dahauni.ir/static/media/images/icon.svg">
+                                <input type="text" name="notifySubject" placeholder="عنوان نوتیفیکیشن" aria-placeholder="موضوع نوتیفیکیشن" aria-label="موضوع نوتیفیکیشن" required>
+                                <input type="url" name="notifyUrlLink" placeholder="آدرس نوتیفیکیشن (عملکرد)" aria-placeholder="آدرس نوتیفیکیشن (عملکرد)" aria-label="آدرس نوتیفیکیشن (عملکرد)" value="https://dahauni.ir/">
                                 <textarea name="notifyMessage" rows="5" placeholder="پیام نوتیفیکیشن..." aria-placeholder="پیام نوتیفیکیشن..." aria-label="پیام نوتیفیکیشن..." required></textarea>
                                 <input type="submit" value="ارسال" aria-label="ارسال">
 
                                 <div id="hints">
                                     <h4><span class="far fa-exclamation-circle"></span> نکات مهم</h4>
-                                    <li>قسمت <strong>آدرس تصویر</strong> اختیاری می باشد، یعنی نیاز به پر کردن آن نیست، مگر در صورت نیاز می توانید آدرس تصویر را وارد کنید.</li>
-                                    <li>در قسمت <strong>موضوع نوتیفیکیشن و پیام نوتیفیکیشن</strong> سعی شود متن عنوان یا پیام زیاد طولانی نباشد، چون امکان دارد در گوشی متن کامل دیده نشود و همچنین در برخی از موارد سرویس ارسال نوتیفیکیشن هم از ارسال متون طولانی خودداری میکند.</li>
-                                    <li>نوتیفیکیشن در تمام دستگاه هایی که اپلیکیشن را نصب دارند ارسال می شود، اما امکان دارد در بعضی از دستگاه ها، به دلایل خاصی از جمله؛ مشکل در برقراری ارتباط با سرویس گوگل پلی یا نداشتن دسترسی نوتیفیکیشن در دستگاه و... نوتیفیکیشن ارسال نشود.</li>
+                                    <li>قسمت <strong>آدرس آیکون</strong> اختیاری می باشد، یعنی نیاز به پر کردن آن نیست، مگر در صورت نیاز می توانید آدرس آیکون را وارد کنید.</li>
+                                    <li>قسمت <strong>آدرس نوتیفیکیشن (عملکرد)</strong> اختیاری میباشد، در صورت نیاز لینک مورد نظر را جایگذین کنید (کاربرد این لینک: هنگامی که کاربر روی نوتیفیکیشن کلیک کند، کاربر را به این لینک هدایت میکند.)</li>
+                                    <li>در قسمت <strong>عنوان نوتیفیکیشن و پیام نوتیفیکیشن</strong> سعی شود متن عنوان یا پیام زیاد طولانی نباشد، چون امکان دارد در گوشی متن کامل دیده نشود و همچنین در برخی از موارد سرویس ارسال نوتیفیکیشن هم از ارسال متون طولانی خودداری میکند.</li>
+                                    <li>نوتیفیکیشن در تمام دستگاه هایی که مجوز یا دسترسی آنها فعال است، ارسال می شود، اما امکان دارد در بعضی از دستگاه ها، به دلایل خاصی از جمله؛ مشکل در برقراری ارتباط با سرویس گوگل پلی یا نداشتن دسترسی نوتیفیکیشن در دستگاه و... نوتیفیکیشن ارسال نشود.</li>
                                 </div> 
                             </form>
                         </div>
@@ -309,13 +404,13 @@
                     <div class="modal">
                         <div class="modal-line" onclick="modalPossibilities7Func()"></div>
                         <div class="modal-header">
-                            <h4>افزودن پیغام</h4>
+                            <h4>افزودن اعلان</h4>
                         </div>
                         <div class="modal-body">
                             <!-- FORM: SEND ALERT -->
                             <form action="/admin/admin_send_alert/" method="post">
-                                <input type="text" name="titleAlert" placeholder="عنوان پیغام" aria-placeholder="عنوان پیغام" aria-label="عنوان پیغام" required maxlength="500">
-                                <textarea name="contentAlert" rows="5" placeholder="محتوای پیغام..." aria-placeholder="محتوای پیغام..." aria-label="محتوای پیغام..." required></textarea>
+                                <input type="text" name="titleAlert" placeholder="عنوان اعلان" aria-placeholder="عنوان اعلان" aria-label="عنوان اعلان" required maxlength="500">
+                                <textarea name="contentAlert" rows="5" placeholder="متن اعلان..." aria-placeholder="متن اعلان..." aria-label="متن اعلان..." required></textarea>
                                 <input type="submit" value="افزودن" aria-label="افزودن">
                             </form>
 
@@ -379,29 +474,75 @@
                 <!-- TABLE CONTAINER -->
                 <div class="table-container">
                     <div class="table-header">
-                        <li>ردیف</li>
+                        <!-- <li>ردیف</li> -->
                         <li>نام کاربری</li>
                         <li>ایمیل</li>
                         <li>رمز عبور</li>
                         <li>تاریخ ثبت نام</li>
                     </div>
-                    {% for user in users[0:8] %}
-                        <div class="table-body table-body-users">
-                            <li>{{user[0]}}</li>
-                            <li>{{user[1]}}</li>
-                            <li>{{user[2]}}</li>
-                            <li>{{user[3]}}</li>
-                            <li>{{user[4]}}</li>
-                            
-                            {% if user[2] == email_admin %}
-                                <div class="badge-status badge-status-green" title="مدیر"></div>
-                            {% elif user[1] == "root" %}
-                                <div class="badge-status badge-status-red" title="مدیر کامل"></div>
-                            {% else %}
+                    {% if users | length >= 1 %}
+                        {% for user in users[0:8] %}
+                            <div class="table-body table-body-users">
+                                <!-- <li>{{user[0]}}</li> -->
+                                <li>{{user[1]}}</li>
+                                <li><a href="mailto:{{user[2]}}">{{user[2]}}</a></li>
+                                <li>{{user[3]}}</li>
+                                <li>{{user[4]}}</li>
+                                
+                                {% if user[2] == email_admin %}
+                                    <div class="badge-status badge-status-green" title="مدیر"></div>
+                                {% elif user[1] == "root" %}
+                                    <div class="badge-status badge-status-red" title="مدیر کامل"></div>
+                                {% else %}
+                                    <div class="badge-status badge-status-blue" title="کاربر"></div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- SECTION TEACHERS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="users-title">لیست اساتید</h3>
+                    <a href="{{url_for('admin_users')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>نام و نام خانوادگی</li>
+                        <li>ایمیل</li>
+                        <li>رمز عبور</li>
+                        <li>شماره همراه</li>
+                        <li>کد ملی</li>
+                        <li>کد امنیتی</li>
+                        <li>تاریخ ثبت نام</li>
+                    </div>
+                    {% if cursor_teachers_show | length >= 1 %}
+                        {% for teachers in cursor_teachers_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <li>{{teachers[1]}}</li>
+                                <li><a href="mailto:{{teachers[2]}}">{{teachers[2]}}</a></li>
+                                <li>{{teachers[3]}}</li>
+                                <li><a href="tel:{{teachers[4]}}">{{teachers[4]}}</a></li>
+                                <li>{{teachers[5]}}</li>
+                                <li>{{teachers[6]}}</li>
+                                <li>{{teachers[7]}}</li>
+
                                 <div class="badge-status badge-status-blue" title="کاربر"></div>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
 
@@ -420,23 +561,27 @@
                     <!-- TABLE CONTAINER -->
                     <div class="table-container">
                         <div class="table-header">
-                            <li>ردیف</li>
+                            <!-- <li>ردیف</li> -->
                             <li>نام کاربری</li>
                             <li>ایمیل</li>
                             <li>شماره تماس</li>
                             <li>پیام</li>
                             <li>تاریخ ارسال</li>
                         </div>
-                        {% for comment in comments[0:8] %}
-                            <div class="table-body table-body-comments">
-                                <li>{{comment[0]}}</li>
-                                <li>{{comment[1]}}</li>
-                                <li>{{comment[2]}}</li>
-                                <li>{{comment[3]}}</li>
-                                <input type="text" id="tableBodyComments" value="{{comment[4]}}" title="{{comment[4]}}">
-                                <li>{{comment[5]}}</li>
-                            </div>
-                        {% endfor %}
+                        {% if comments | length >= 1 %}
+                            {% for comment in comments[0:8] %}
+                                <div class="table-body table-body-comments">
+                                    <!-- <li>{{comment[0]}}</li> -->
+                                    <li>{{comment[1]}}</li>
+                                    <li><a href="mailto:{{comment[2]}}">{{comment[2]}}</a></li>
+                                    <li><a href="tel:{{comment[3]}}">{{comment[3]}}</a></li>
+                                    <input type="text" id="tableBodyComments" value="{{comment[4]}}" title="{{comment[4]}}">
+                                    <li>{{comment[5]}}</li>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                        {% endif %}
                     </div>
                 </div>
             </section>
@@ -456,6 +601,7 @@
                 <div class="table-container">
                     <div class="table-header">
                         <!-- <li>ردیف</li> -->
+                        <li>لینک تصویر</li>
                         <li>نام و نام خانوادگی</li>
                         <li>عنوان شغل</li>
                         <li>عنوان آگهی</li>
@@ -466,20 +612,25 @@
                         <li>توضیحات</li>
                         <li>تاریخ ثبت درخواست</li>
                     </div>
-                    {% for technologist in cursor_technologist_show[0:8] %}
-                        <div class="table-body table-body-comments">
-                            <!-- <li>{{technologist[0]}}</li> -->
-                            <li>{{technologist[1]}}</li>
-                            <li title="{{technologist[2]}}">{{technologist[2]}}</li>
-                            <li>{{technologist[3]}}</li>
-                            <li><a href="mailto:{{technologist[4]}}">{{technologist[4]}}</a></li>
-                            <li><a href="tel:{{technologist[5]}}">{{technologist[5]}}</a></li>
-                            <li>{{technologist[6]}}</li>
-                            <li title="{{technologist[7]}}">{{technologist[7]}}</li>
-                            <li title="{{technologist[8]}}">{{technologist[8]}}</li>
-                            <li>{{technologist[9]}}</li>
-                        </div>
-                    {% endfor %}
+                    {% if cursor_technologist_show | length >= 1 %}
+                        {% for technologist in cursor_technologist_show[0:8] %}
+                            <div class="table-body table-body-comments">
+                                <!-- <li>{{technologist[0]}}</li> -->
+                                <li><a href="/static/media/uploads/{{technologist[1]}}"><img src="/static/media/uploads/{{technologist[1]}}" alt="{{technologist[3]}}" style="width: 30px; height: 30px; object-fit: cover; border-radius: 9999px;"></a></li>
+                                <li>{{technologist[2]}}</li>
+                                <li title="{{technologist[3]}}">{{technologist[3]}}</li>
+                                <li>{{technologist[4]}}</li>
+                                <li><a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></li>
+                                <li><a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></li>
+                                <li>{{technologist[7]}}</li>
+                                <li title="{{technologist[8]}}">{{technologist[8]}}</li>
+                                <li title="{{technologist[9]}}">{{technologist[9]}}</li>
+                                <li>{{technologist[10]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
 
@@ -497,23 +648,27 @@
                 <!-- TABLE CONTAINER -->
                 <div class="table-container">
                     <div class="table-header">
-                        <li>ردیف</li>
+                        <!-- <li>ردیف</li> -->
                         <li>لینک تصویر</li>
                         <li>عنوان رویداد</li>
                         <li>توضیحات مختصر رویداد</li>
                         <li>لینک رویداد</li>
                         <li>تاریخ ثبت</li>
                     </div>
-                    {% for event in cursor_events_show[0:8] %}
-                        <div class="table-body table-body-users">
-                            <li>{{event[0]}}</li>
-                            <li><a href="{{event[1]}}">{{event[1]}}</a></li>
-                            <li title="{{event[2]}}">{{event[2]}}</li>
-                            <li title="{{event[3]}}">{{event[3]}}</li>
-                            <li style="white-space: nowrap;"><a href="{{event[4]}}" target="_blank">{{event[4]}}</a></li>
-                            <li>{{event[5]}}</li>
-                        </div>
-                    {% endfor %}
+                    {% if cursor_events_show | length >= 1 %}
+                        {% for event in cursor_events_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <!-- <li>{{event[0]}}</li> -->
+                                <li><a href="{{event[1]}}"><img src="{{event[1]}}" alt="{{event[2]}}" style="width: 30px; height: 30px; object-fit: cover; border-radius: 9999px;"></a></li>
+                                <li title="{{event[2]}}">{{event[2]}}</li>
+                                <li title="{{event[3]}}">{{event[3]}}</li>
+                                <li style="white-space: nowrap;"><a href="{{event[4]}}" target="_blank">{{event[4]}}</a></li>
+                                <li>{{event[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
 
@@ -531,19 +686,23 @@
                 <!-- TABLE CONTAINER -->
                 <div class="table-container">
                     <div class="table-header">
-                        <li>ردیف</li>
+                        <!-- <li>ردیف</li> -->
                         <li>عنوان سامانه</li>
                         <li>لینک سامانه</li>
                         <li>تاریخ ثبت</li>
                     </div>
-                    {% for site in cursor_sites_show[0:8] %}
-                        <div class="table-body table-body-users">
-                            <li>{{site[0]}}</li>
-                            <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[1]}}</a></li>
-                            <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[2]}}</a></li>
-                            <li>{{site[3]}}</li>
-                        </div>
-                    {% endfor %}
+                    {% if cursor_sites_show | length >= 1 %}
+                        {% for site in cursor_sites_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <!-- <li>{{site[0]}}</li> -->
+                                <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[1]}}</a></li>
+                                <li style="white-space: nowrap;"><a href="{{site[2]}}">{{site[2]}}</a></li>
+                                <li>{{site[3]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
 
@@ -561,19 +720,25 @@
                 <!-- TABLE CONTAINER -->
                 <div class="table-container">
                     <div class="table-header">
-                        <li>ردیف</li>
-                        <li>عنوان رشته، جزوه</li>
+                        <!-- <li>ردیف</li> -->
+                        <li>عنوان جزوه</li>
                         <li>لینک فایل</li>
+                        <li>کد ملی استاد</li>
                         <li>تاریخ ثبت</li>
                     </div>
-                    {% for publisher in cursor_publishers_show[0:8] %}
-                        <div class="table-body table-body-users">
-                            <li>{{publisher[0]}}</li>
-                            <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[1]}}</a></li>
-                            <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[2]}}</a></li>
-                            <li>{{publisher[3]}}</li>
-                        </div>
-                    {% endfor %}
+                    {% if cursor_publishers_show | length >= 1 %}
+                        {% for publisher in cursor_publishers_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <!-- <li>{{publisher[0]}}</li> -->
+                                <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[1]}}</a></li>
+                                <li style="white-space: nowrap;"><a href="{{publisher[2]}}">{{publisher[2]}}</a></li>
+                                <li>{{publisher[4]}}</li>
+                                <li>{{publisher[3]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
 
@@ -597,15 +762,127 @@
                         <li>ایمیل</li>
                         <li>تاریخ ثبت</li>
                     </div>
-                    {% for ticket in cursor_ticket_show[0:8] %}
-                        <div class="table-body table-body-users">
-                            <li>{{ticket[1]}}</li>
-                            <li title="{{ticket[2]}}">{{ticket[2]}}</li>
-                            <input type="text" id="tableBodyComments" value="{{ticket[4]}}" title="{{ticket[4]}}">
-                            <li><a href="mailto:{{ticket[3]}}">{{ticket[3]}}</a></li>
-                            <li>{{ticket[5]}}</li>
-                        </div>
-                    {% endfor %}
+                    {% if cursor_ticket_show | length >= 1 %}
+                        {% for ticket in cursor_ticket_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <li>{{ticket[1]}}</li>
+                                <li title="{{ticket[2]}}">{{ticket[2]}}</li>
+                                <input type="text" id="tableBodyComments" value="{{ticket[4]}}" title="{{ticket[4]}}">
+                                <li><a href="mailto:{{ticket[3]}}">{{ticket[3]}}</a></li>
+                                <li>{{ticket[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- SECTION TEACHERS NOTIFICATIONS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="users-title">اعلانات اساتید</h3>
+                    <a href="{{url_for('admin_teachers_notifications')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li style="font-size: 12px;">نام استاد، عنوان رشته، نام درس</li>
+                        <li>موضوع اعلان</li>
+                        <li>متن اعلان</li>
+                        <li>کد ملی استاد</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% if cursor_teachers_notifications_show | length >= 1 %}
+                        {% for teachers_notifications in cursor_teachers_notifications_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <li>{{teachers_notifications[1]}}</li>
+                                <li>{{teachers_notifications[2]}}</li>
+                                <input type="text" id="tableBodyComments" value="{{teachers_notifications[3]}}" title="{{teachers_notifications[3]}}">
+                                <li>{{teachers_notifications[4]}}</li>
+                                <li>{{teachers_notifications[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- SECTION NOTIFICATIONS -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="notifications-title">نوتیفیکیشن ها</h3>
+                    <a href="{{url_for('admin_notify')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>آیکون</li>
+                        <li>موضوع نوتیفیکیشن</li>
+                        <li>متن نوتیفیکیشن</li>
+                        <li>لینک نوتیفیکیشن</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% if cursor_notifications_show | length >= 1 %}
+                        {% for notifications in cursor_notifications_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <li><img src="{{notifications[1]}}" alt="{{notifications[2]}}" title="{{notifications[2]}}" style="width: 25px; border-radius: 9999px;"></li>
+                                <li>{{notifications[2]}}</li>
+                                <li title="{{notifications[3]}}">{{notifications[3]}}</li>
+                                <li style="display: flex; align-items: center; justify-content: center;"><a href="{{notifications[4]}}" title="{{notifications[2]}}"><span class="far fa-external-link"></span></a></li>
+                                <li>{{notifications[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- SECTION API -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="api-title">توسعه دهندگان</h3>
+                    <a href="{{url_for('admin_api')}}">
+                        <span>مشاهده بیشتر</span>
+                        <span class="far fa-angle-right"></span>
+                    </a>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <li>نام و نام خانوادگی</li>
+                        <li>ایمیل</li>
+                        <li>شماره تماس</li>
+                        <li>رمز عبور</li>
+                        <li>تاریخ ثبت</li>
+                    </div>
+                    {% if cursor_api_show | length >= 1 %}
+                        {% for api in cursor_api_show[0:8] %}
+                            <div class="table-body table-body-users">
+                                <li>{{api[1]}}</li>
+                                <li><a href="mailto:{{api[2]}}">{{api[2]}}</a></li>
+                                <li><a href="tel:{{api[3]}}">{{api[3]}}</a></li>
+                                <li>{{api[4]}}</li>
+                                <li>{{api[5]}}</li>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                    {% endif %}
                 </div>
             </section>
         </aside>

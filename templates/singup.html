@@ -23,7 +23,7 @@
         <!-- FORM: SINGUP -->
         <form action="/singup" method="post">
             <!-- LOGO DAHA -->
-            <img src="{{ url_for('static', filename='media/images/icon.svg') }}" alt="logo daha" class="form-in-logo" draggable="false">
+            <img src="https://dahauni.ir/static/media/images/icon.svg" alt="logo daha" class="form-in-logo" draggable="false">
 
             <h4 style="margin-top: 120px;">ایجاد حساب کاربری</h4>
             <p style="margin-top: -15px; margin-bottom: 20px; font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
@@ -31,7 +31,11 @@
             <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
             <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
             <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
-            <a href="javascript:modalPossibilities2Func()" style="margin-top: 10px; margin-bottom: 5px; font-size: 12px; text-align: right;" class="link-singin-conditions"><span class="far fa-check-circle"></span> شرایط ثبت نام</a>
+
+            <div style="margin: 10px 0; display: flex; align-items: center; justify-content: space-between; width: 100%; font-weight: 500;">
+                <a href="javascript:modalPossibilities2Func()" style="font-size: 12px; margin: 0;" class="link-singin-conditions"><span class="far fa-check-circle"></span> شرایط ثبت نام</a>
+                <a href="javascript:modalPossibilities5Func()" style="font-size: 12px; margin: 0;" class="link-singin-conditions"><span class="far fa-sign-in"></span> ثبت نام استاتید</a>
+            </div>
 
             <input type="submit" value="ثبت نام" aria-label="ثبت نام" id="eventSubmitSingin" onclick="eventSubmitSinginFunc(); navigator.vibrate(200)">
 
@@ -49,14 +53,75 @@
                 <h4>شرایط ثبت نام</h4>
             </div>
             <div class="modal-body">
-                <div id="hints">
+                <div id="hints" style="margin-top: 0;">
+                    <p style="font-size: 14px; font-weight: 600; margin-bottom: 20px;">لطفا <a href="javascript:modalPrivacyPoliciesFunc()"><span style="border-bottom: 1px solid;">سیاست های حریم خصوصی</span></a> را ملاحظه کنید.</p>
+                    
                     <p style="margin-bottom: 20px;">کاربر گرامی لطفا موارد زیر را جهت استفاده بهینه از سرویس های داها با دقت ملاحظه فرمایید.</p>
-                    <li><strong>نکته اول:</strong> الزاما از ایمیل معتبر استفاده کنید، زیرا برخی از سرویس های داها نیاز به ایمیل دارند به عنوان مثال؛ برای ثبت آگهی و ... شما باید ایمیل داشته باشید تا بعد از ثبت درخواست، وضعیت آگهی تان به شما اعلام شود.</li>
+                    <li><strong>نکته اول:</strong> الزاما از ایمیل معتبر استفاده کنید، زیرا برخی از سرویس های داها نیاز به ایمیل دارند به عنوان مثال؛ برای ثبت آگهی، ارسال تیکت و ... شما باید ایمیل داشته باشید تا بعد از ثبت درخواست، وضعیت آگهی تان به شما اعلام شود.</li>
                     <li><strong>نکته دوم:</strong> سعی کنید تمامی بخش های خواسته شده را با اطلاعات واقعی و حقیقی خود ثبت کنید.</li>
                     <li><strong>نکته سوم:</strong> رمز عبور خود را ترکیبی از اعداد، حروف و علایم قرار دهید، تا حسابتان ایمن بماند.</li>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- MODAL: PRIVACY POLICIES -->
+    <div class="modal-overlay" id="modalPrivacyPolicies">
+        <i onclick="modalPrivacyPoliciesFunc()"></i>
+        <div class="modal">
+            <div class="modal-line" onclick="modalPrivacyPoliciesFunc()"></div>
+            <div class="modal-header">
+                <h4>سیاست های حریم خصوصی</h4>
+            </div>
+            <div class="modal-body">
+                <div id="hints">
+                    <h4>امنیت</h4>
+                    <p>ما می دانیم که امنیت اطلاعات برای کاربران مهم است، لذا ما نهایت تلاش را برای حفظ امنیت اطلاعات شما انجام می دهیم، ما سعی می کنیم تا از بروز ترین پارامترهای امنیتی برای حفظ اطلاعات شما استفاده کنیم.</p>
+                    <h4>اشتراک گذاری</h4>
+                    <p>ما هرگز اطلاعات کاربران را با هیچ شخص و یا سازمانی به اشتراک نمی گذاریم، مگر در مواقعی که مجوز مربوطه را دریافت کنند و تحت کنترل ما باشند.</p>
+                    <h4>ذخیره اطلاعات</h4>
+                    <p>ما تنها داده هایی را ذخیره می کنیم که برای عملکرد درست به آنها نیاز است. البته این مورد تا زمانی است که شما از برنامه استفاده می کنید. در صورتیکه حساب کاربری خود را در داها  حذف نمایید، کلیه اطلاعات کاربری شما حذف خواهد شد، البته شامل آگهی و برخی از این موارد نمی شود.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: SINGUP TEACHER -->
+    <div class="modal-overlay" id="modalPossibilities5">
+        <i onclick="modalPossibilities5Func()"></i>
+        <div class="modal">
+            <div class="modal-line" onclick="modalPossibilities5Func()"></div>
+            <div class="modal-header" style="text-align: center;">
+                <h4>ایجاد حساب کاربری</h4>
+                <p style="font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
+            </div>
+            <div class="modal-body" style="margin-top: 25px;">
+                <!-- FORM: SINGUP TEACHER -->
+                <form action="/singup_teacher/" method="post">
+                    <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
+                    <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+                    <input type="tel" name="teacherUniqueCode" placeholder="کد ملی" aria-placeholder="کد ملی" aria-label="کد ملی" required maxlength="10">
+                    <input type="tel" name="teacherNumber" placeholder="شماره همراه" aria-placeholder="شماره همراه" aria-label="شماره همراه" required maxlength="11">
+                    <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
+
+                    <input type="submit" value="ورود" aria-label="ورود" id="eventSubmitLogin" onclick="eventSubmitLoginFunc()">
+
+                    <div id="hints">
+                        <h4><span class="far fa-exclamation-circle"></span> راهنما</h4>
+                        <li style="font-weight: bold;">این قابلیت برای استاتید طراحی شده تا بتوانند برای خود حساب کاربری ایجاد کنند.</li>
+                        <li style="font-weight: bold;">استاد گرامی، در صورت عدم ثبت حساب کاربری یا بروز مشکل، یک حساب معمولی (بدون کد ملی) ایجاد کرده و به پشتیبانی تیکت بزنید.</li>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #modalPossibilities5 .modal input:nth-child(3),
+        #modalPossibilities5 .modal input:nth-child(4),
+        #modalPossibilities5 .modal input:nth-child(5) {
+            background-color: #f8f8f8;
+        }
+    </style>
 
 {% endblock body %}

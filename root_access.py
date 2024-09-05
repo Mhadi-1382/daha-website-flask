@@ -1,6 +1,6 @@
 
 '''
-DAHA CLI: ROOT ACCESS DATABASE . VER 1.0.0
+DAHA CLI: ROOT ACCESS DATABASE . V1.1.0
 GITHUB: https://github.com/Mhadi-1382/daha-website-flask
 '''
 
@@ -16,8 +16,7 @@ try:
         os.getenv('DB_HOST', 'localhost'),
         os.getenv('DB_USER', 'root'),
         os.getenv('DB_PASSWORD', ''),
-        os.getenv('DB_NAME', 'DahaDB'),
-        # int(os.getenv('DB_PORT', 55063))
+        os.getenv('DB_NAME', 'DahaDB')
     )
     print("DATABASE CONECTED.")
 except:
@@ -25,8 +24,8 @@ except:
     exit()
 
 # PASSWORD & DATE ADMIN
-password_admin = "root"
-date_admin = "R"
+password_admin = ""
+date_admin = ""
 
 def login_root_access():
     '''LOGIN ROOT ACCESS'''
@@ -65,11 +64,15 @@ splashCLI = '''DAHA CLI
 ROOT ACCESS.
 
 [0] Create Admin User
-[1] Show Details User
-[2] Delete User
-[3] Exit CLI
+[1] Show Details Users
+[2] Show Details Teachers
+[3] Delete User & Teacher
+[4] Exit CLI
 '''
-print(splashCLI)
+for i in splashCLI:
+    print(f"{i}", end="", flush=True)
+    sleep(0.05)
+print()
 
 def create_admin_user():
     '''CREATE ADMIN USER'''
@@ -87,8 +90,8 @@ def create_admin_user():
 
     print(Fore.LIGHTGREEN_EX + "[✔] CREATE ADMIN USER." + Fore.WHITE + "\n")
 
-def show_details_user():
-    '''SHOW DETAILS USER'''
+def show_details_users():
+    '''SHOW DETAILS USERS'''
     cursorCLI = mysqlCLI.cursor()
     cursorCLI.execute("SELECT * FROM users")
     print()
@@ -96,18 +99,43 @@ def show_details_user():
         print(u)
     print()
 
-def delete_user():
-    '''DELETE USER'''
-    inputIDUser = int(input('⊢ USER ID ... '))
+def show_details_teachers():
+    '''SHOW DETAILS TEACHERS'''
     cursorCLI = mysqlCLI.cursor()
+    cursorCLI.execute("SELECT * FROM teachers")
+    print()
+    for u in cursorCLI.fetchall():
+        print(u)
+    print()
 
-    if cursorCLI.execute(f"SELECT * FROM users WHERE id = {inputIDUser}"):
-        cursorCLI.execute(f"DELETE FROM users WHERE id = {inputIDUser}")
-        mysqlCLI.commit()
+def delete_user_teacher():
+    '''DELETE USER & TEACHER'''
+    inputQuerySelectUser = input('⊢ USER/U or TEACHER/T: ')
+    
+    if inputQuerySelectUser  == "USER" or inputQuerySelectUser  == "user" or inputQuerySelectUser  == "U" or inputQuerySelectUser  == "u":
+        inputIDUser = int(input(' ⊢ USER ID ... '))
 
-        print(Fore.LIGHTGREEN_EX + f"[✔] THE USER WAS REMOVED WITH ID {inputIDUser}." + Fore.WHITE + "\n")
+        cursorCLI = mysqlCLI.cursor()
+        if cursorCLI.execute(f"SELECT * FROM users WHERE id = {inputIDUser}"):
+            cursorCLI.execute(f"DELETE FROM users WHERE id = {inputIDUser}")
+            mysqlCLI.commit()
+
+            print(Fore.LIGHTGREEN_EX + f"[✔] THE USER WAS REMOVED WITH ID {inputIDUser}." + Fore.WHITE + "\n")
+        else:
+            print(Fore.YELLOW + "[!] ID DO NOT EXIST." + Fore.WHITE + "\n")
+    elif inputQuerySelectUser  == "TEACHER" or inputQuerySelectUser  == "teacher" or inputQuerySelectUser  == "T" or inputQuerySelectUser  == "t":
+        inputIDTeachers = int(input(' ⊢ TEACHER ID ... '))
+
+        cursorCLI = mysqlCLI.cursor()
+        if cursorCLI.execute(f"SELECT * FROM teachers WHERE idTeachers = {inputIDTeachers}"):
+            cursorCLI.execute(f"DELETE FROM teachers WHERE idTeachers = {inputIDTeachers}")
+            mysqlCLI.commit()
+
+            print(Fore.LIGHTGREEN_EX + f"[✔] THE TEACHER WAS REMOVED WITH ID {inputIDTeachers}." + Fore.WHITE + "\n")
+        else:
+            print(Fore.YELLOW + "[!] ID DO NOT EXIST." + Fore.WHITE + "\n")
     else:
-        print(Fore.YELLOW + "[!] ID DO NOT EXIST." + Fore.WHITE + "\n")
+        pass
 
 while True:
     query = input('Please Select The Option: ')
@@ -115,10 +143,12 @@ while True:
     if int(query) == 0:
         create_admin_user()
     elif int(query) == 1:
-        show_details_user()
+        show_details_users()
     elif int(query) == 2:
-        delete_user()
+        show_details_teachers()
     elif int(query) == 3:
+        delete_user_teacher()
+    elif int(query) == 4:
         mysqlCLI.close()
         break
     else:

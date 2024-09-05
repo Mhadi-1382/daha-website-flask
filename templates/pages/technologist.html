@@ -17,6 +17,7 @@
 
         </aside>
         <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
             <div class="background-image" style="background-color: transparent;">
                 {% include 'includes/navbar_mobile.html' %}
             </div>
@@ -45,83 +46,255 @@
                                 <!-- FORM: TECHNOLOGIST -->
                                 <form action="/pages/technologist/" method="post" enctype="multipart/form-data">
                                     <input type="text" name="usernameTechnologist" placeholder="نام و نام خانوادگی" aria-placeholder="نام و نام خانوادگی" aria-label="نام و نام خانوادگی" required maxlength="100">
-                                    <input type="text" name="titleTechnologist" placeholder="عنوان شغل" aria-placeholder="عنوان شغل" aria-label="عنوان شغل" required maxlength="200">
-                                    <input type="text" name="titleJobTechnologist" placeholder="انتخاب عنوان آگهی (کارجو یا کسب و کار)" aria-placeholder="انتخاب عنوان آگهی، کارجو یا کسب و کار" aria-label="انتخاب عنوان آگهی، کارجو یا کسب و کار" required maxlength="30">
-                                    <!-- <select>
-                                        <option value="" selected>انتخاب عنوان آگهی...</option>
-                                        <option value="karjo" id="option1">کارجو</option>
-                                        <option value="kasbVaKar" id="option2">کسب و کار</option>
-                                    </select> -->
+                                    <input type="text" name="titleTechnologist" placeholder="عنوان آگهی" aria-placeholder="عنوان آگهی" aria-label="عنوان آگهی" required maxlength="200">
+                                    <input type="text" name="titleJobTechnologist" placeholder="انتخاب نوع آگهی (کارجو یا کسب و کار)" aria-placeholder="انتخاب نوع آگهی (کارجو یا کسب و کار)" aria-label="انتخاب نوع آگهی (کارجو یا کسب و کار)" required maxlength="30">
                                     <input type="email" name="emailTechnologist" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required maxlength="200">
                                     <input type="tel" name="phoneTechnologist" placeholder="شماره تماس" aria-placeholder="شماره تماس" aria-label="شماره تماس" required maxlength="15">
-                                    <input type="text" name="categoryTechnologist" placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-placeholder="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" aria-label="دسته بندی؛ تکنولوژی، ساختمان، خودرو، سایر" required maxlength="100">
+                                    <input type="text" name="categoryTechnologist" placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-placeholder="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" aria-label="دسته بندی (تکنولوژی، ساختمان، خودرو، سایر)" required maxlength="100">
                                     <input type="text" name="addressTechnologist" id="addressTechnologist" placeholder="آدرس محل کار" aria-placeholder="آدرس محل کار" aria-label="آدرس محل کار" maxlength="500">
                                     <input type="text" name="desTechnologist" placeholder="توضیحات" aria-placeholder="توضیحات" aria-label="توضیحات" required maxlength="500">
                                     <div>
-                                        <label for="">بارگذاری تصویر شما</label>
-                                        <input type="file" name="fileTechnologist" placeholder="تصویر شما" aria-placeholder="تصویر شما" aria-label="تصویر شما" required accept="image/*">
+                                        <label for="fileTechnologist">بارگذاری تصویر شما</label>
+                                        <input type="file" id="fileTechnologist" name="fileTechnologist" placeholder="تصویر شما" aria-placeholder="تصویر شما" aria-label="تصویر شما" required accept="image/*">
+                                        
+                                        <div style="margin: 20px 0 0 0 !important;">
+                                            <label for="selectExpirTechnologist">انتخاب بسته</label>
+                                            <div class="select-expir-technologist-value" style="margin: 0 !important;">
+                                                <select id="selectExpirTechnologist" name="selectExpirTechnologist" aria-placeholder="انتخاب بسته" aria-label="انتخاب بسته" style="cursor: pointer;" required>
+                                                    <option value="1" selected>پایه - 1 ماهه</option>
+                                                    <!-- <option value="2">پیشرفته - 1 ماهه</option> -->
+                                                </select>
+                                                <span id="selectExpirTechnologistValue">{{ pricePackages[0] }}</span>
+                                            </div>
+                                            <!-- <li class="select-expir-technologist-li"><a href="" style="margin-top: 10px;border-bottom: 1px dashed;width: auto;font-size: 12px;">تعرفه و مقایسه بسته ها</a></li> -->
+                                        </div>
+
+                                        <style>
+                                            .select-expir-technologist-value span {
+                                                background-color: #fff;
+                                                border-radius: 9999px;
+                                                margin-top: 17.7px;
+                                                position: absolute;
+                                                padding: 1px 10px;
+                                                color: #555555;
+                                                font-size: 13px;
+                                                left: 30px;
+                                            }
+                                            .toggleMode .select-expir-technologist-value span {
+                                                background-color: #0b0b0b;
+                                            }
+
+                                            .select-expir-technologist-li a:hover {
+                                                transition: all 0.2s ease-in;
+                                                opacity: 50%;
+                                            }
+                                        </style>
+
+                                        <script>
+                                            var selectExpirTechnologist = document.getElementById('selectExpirTechnologist');
+                                            var selectExpirTechnologistValue = document.getElementById('selectExpirTechnologistValue');
+                                            selectExpirTechnologist.onclick = () => {
+                                                if (selectExpirTechnologist.value == '1') {
+                                                    selectExpirTechnologistValue.innerHTML = '{{ pricePackages[0] }}';
+                                                } else if (selectExpirTechnologist.value == '2') {
+                                                    selectExpirTechnologistValue.innerHTML = '{{ pricePackages[1] }}';
+                                                }
+                                            }
+                                        </script>
                                     </div>
                                     <input type="submit" value="ثبت درخواست" aria-label="ثبت درخواست">
 
                                     <div id="hints">
                                         <h4><span class="far fa-exclamation-circle"></span> نکات مهم</h4>
-                                        <li>اگر قصد دارید به عنوان کارجو یا تبلیغ از کسب خود آگهی را ثبت کنید، در قسمت <strong>انتخاب عنوان آگهی</strong> عنوان مربوطه را مشخص کنید (کارجو یا کسب و کار)، در غیر این صورت درخواست شما پذیرفته نمی شود.</li>
+                                        <li>اگر قصد دارید به عنوان کارجو یا تبلیغ از کسب خود آگهی را ثبت کنید، در قسمت <strong>انتخاب نوع آگهی</strong> نوع مربوطه را مشخص کنید <strong>(کارجو یا کسب و کار)</strong>، در غیر این صورت درخواست شما پذیرفته نمی شود.</li>
                                         <li>در قسمت <strong>بارگذاری تصویر شما</strong> باید تصویری از چهره خود در سبک و وضوح مناسب بارگذاری کنید.</li>
-                                        <li>بعد از ثبت درخواست و بررسی درخواست شما توسط کارشناسان ما، آگهی شما تایید و در بخش فن آور اضافه می شود، و در صورت نیاز یا عدم تایید آگهی با شما تماس گرفته خواهد شد.</li>
+                                        <li>بعد از ثبت درخواست و بررسی درخواست شما توسط کارشناسان ما، آگهی شما به مرحله تایید (در انتظار پرداخت) می رود و  بعد از تایید پرداخت (نحوه پرداخت در ایمیل ذکر شده)، آگهی شما در قسمت فن آور اضافه می شود، در صورت نیاز یا عدم تایید آگهی با شما تماس گرفته خواهد شد.</li>
                                     </div> 
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <!-- CARD TECHNOLOGIST -->
-                    <div class="grid-technologist">
-                        {% if cursor_technologist_show | length >= 1 %}
-                            {% for technologist in cursor_technologist_show %}
-                                <div class="card-technologist">
-                                    <details>
-                                        <summary>
-                                            <div class="card-technologist-header">
-                                                <img src="{{technologist[1]}}" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
-                                                <div>
-                                                    <h4>{{technologist[2]}}</h4>
-                                                    <p>{{technologist[3]}}</p>
-                                                    
-                                                    {% if technologist[7] == "تکنولوژی" %}
-                                                        <li class="badge badge-blue">{{technologist[7]}}</li>
-                                                    {% elif technologist[7] == "ساختمان" %}
-                                                        <li class="badge badge-green">{{technologist[7]}}</li>
-                                                    {% elif technologist[7] == "خودرو" %}
-                                                        <li class="badge badge-orange">{{technologist[7]}}</li>
+                    <!-- CARD TECHNOLOGIST: CATEGORY: TECHNOLOGY -->
+                    {% if cursor_technologist_show | length >= 1 %}
+                        <div style="margin-top: 50px;">
+                            <h3>تکنولوژی</h3>
+                            <div class="grid-technologist" style="margin-top: 0; display: inline-flex; overflow: hidden; overflow-x: auto; width: 100%;">
+                                {% for technologist in cursor_technologist_show %}
+                                    {% if technologist[7] == "تکنولوژی" %}
+                                        <div class="card-technologist" id="id={{technologist[0]}}">
+                                            <details style="width: 400px;">
+                                                <summary>
+                                                    <div class="card-technologist-header">
+                                                        <img src="/static/media/uploads/{{technologist[1]}}/" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
+                                                        <div>
+                                                            <h4>{{technologist[2]}}</h4>
+                                                            <p>{{technologist[3]}}</p>
+                                                            
+                                                            {% if technologist[7] == "تکنولوژی" %}
+                                                                <li class="badge badge-blue">{{technologist[7]}}</li>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
+                                                </summary>
+                                                <div class="card-technologist-body">
+                                                    <p><strong>نوع آگهی:</strong> {{technologist[4]}}</p>
+                                                    <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
+                                                    <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
+                                                    <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
+                                                    {% if technologist[8] == '' %}
+                                                        <p><strong>آدرس محل کار:</strong> _</p>
                                                     {% else %}
-                                                        <li class="badge badge-silver">{{technologist[7]}}</li>
+                                                        <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
                                                     {% endif %}
+                                                    <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
                                                 </div>
-                                            </div>
-                                            <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
-                                        </summary>
-                                        <div class="card-technologist-body">
-                                            <p><strong>عنوان آگهی:</strong> {{technologist[4]}}</p>
-                                            <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
-                                            <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
-                                            <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
-                                            {% if technologist[8] == '' %}
-                                                <p><strong>آدرس محل کار:</strong> _</p>
-                                            {% else %}
-                                                <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
-                                            {% endif %}
-                                            <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
+                                            </details>
                                         </div>
-                                    </details>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <p style="color: #808080;">موردی یافت نشده است، <br> اولین نفری باش که آگهی خودت رو ثبت میکنی...</p>
-                        {% endif %}
-                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- CARD TECHNOLOGIST: CATEGORY: BUILDING -->
+                        <div style="margin-top: 0px;">
+                            <h3>ساختمان</h3>
+                            <div class="grid-technologist" style="margin-top: 0; display: inline-flex; overflow: hidden; overflow-x: auto; width: 100%;">
+                                {% for technologist in cursor_technologist_show %}
+                                    {% if technologist[7] == "ساختمان" %}
+                                        <div class="card-technologist" id="id={{technologist[0]}}">
+                                            <details style="width: 400px;">
+                                                <summary>
+                                                    <div class="card-technologist-header">
+                                                        <img src="/static/media/uploads/{{technologist[1]}}/" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
+                                                        <div>
+                                                            <h4>{{technologist[2]}}</h4>
+                                                            <p>{{technologist[3]}}</p>
+                                                            
+                                                            {% if technologist[7] == "ساختمان" %}
+                                                                <li class="badge badge-green">{{technologist[7]}}</li>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
+                                                </summary>
+                                                <div class="card-technologist-body">
+                                                    <p><strong>نوع آگهی:</strong> {{technologist[4]}}</p>
+                                                    <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
+                                                    <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
+                                                    <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
+                                                    {% if technologist[8] == '' %}
+                                                        <p><strong>آدرس محل کار:</strong> _</p>
+                                                    {% else %}
+                                                        <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
+                                                    {% endif %}
+                                                    <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- CARD TECHNOLOGIST: CATEGORY: CAR -->
+                        <div style="margin-top: 0px;">
+                            <h3>خودرو</h3>
+                            <div class="grid-technologist" style="margin-top: 0; display: inline-flex; overflow: hidden; overflow-x: auto; width: 100%;">
+                                {% for technologist in cursor_technologist_show %}
+                                    {% if technologist[7] == "خودرو" %}
+                                        <div class="card-technologist" id="id={{technologist[0]}}">
+                                            <details style="width: 400px;">
+                                                <summary>
+                                                    <div class="card-technologist-header">
+                                                        <img src="/static/media/uploads/{{technologist[1]}}/" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
+                                                        <div>
+                                                            <h4>{{technologist[2]}}</h4>
+                                                            <p>{{technologist[3]}}</p>
+                                                            
+                                                            {% if technologist[7] == "خودرو" %}
+                                                                <li class="badge badge-orange">{{technologist[7]}}</li>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
+                                                </summary>
+                                                <div class="card-technologist-body">
+                                                    <p><strong>نوع آگهی:</strong> {{technologist[4]}}</p>
+                                                    <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
+                                                    <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
+                                                    <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
+                                                    {% if technologist[8] == '' %}
+                                                        <p><strong>آدرس محل کار:</strong> _</p>
+                                                    {% else %}
+                                                        <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
+                                                    {% endif %}
+                                                    <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- CARD TECHNOLOGIST: CATEGORY: OTHER -->
+                        <div style="margin-top: 0px;">
+                            <h3>سایر</h3>
+                            <div class="grid-technologist" style="margin-top: 0; display: inline-flex; overflow: hidden; overflow-x: auto; width: 100%;">
+                                {% for technologist in cursor_technologist_show %}
+                                    {% if technologist[7] == "سایر" %}
+                                        <div class="card-technologist" id="id={{technologist[0]}}">
+                                            <details style="width: 400px;">
+                                                <summary>
+                                                    <div class="card-technologist-header">
+                                                        <img src="/static/media/uploads/{{technologist[1]}}/" alt="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" title="{{technologist[2]}}, {{technologist[3]}}, {{technologist[9]}}" draggable="false">
+                                                        <div>
+                                                            <h4>{{technologist[2]}}</h4>
+                                                            <p>{{technologist[3]}}</p>
+                                                            
+                                                            {% if technologist[7] == "سایر" %}
+                                                                <li class="badge badge-silver">{{technologist[7]}}</li>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <li class="badge summary-badge-hover-custome" title="مشاهده جزییات بیشتر"><span class="far fa-plus" style="margin: 0 0 0 5px;"></span> جزییات</li>
+                                                </summary>
+                                                <div class="card-technologist-body">
+                                                    <p><strong>نوع آگهی:</strong> {{technologist[4]}}</p>
+                                                    <p><strong>دسته بندی:</strong> {{technologist[7]}}</p>
+                                                    <p><strong>ایمیل:</strong> <a href="mailto:{{technologist[5]}}">{{technologist[5]}}</a></p>
+                                                    <p><strong>شماره تماس:</strong> <a href="tel:{{technologist[6]}}">{{technologist[6]}}</a></p>
+                                                    {% if technologist[8] == '' %}
+                                                        <p><strong>آدرس محل کار:</strong> _</p>
+                                                    {% else %}
+                                                        <p><strong>آدرس محل کار:</strong> {{technologist[8]}}</p>
+                                                    {% endif %}
+                                                    <p><strong>توضیحات:</strong> {{technologist[9]}}</p>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <p style="color: #808080; margin-top: 50px;">موردی یافت نشده است، <br> اولین نفری باش که آگهی خودت رو ثبت میکنی...</p>
+                    {% endif %}
                 </div>
             </div>
         </aside>
     </div>
+
+    {% include 'includes/daha_voice_assistant.html' %}
+
+    <style>
+        .card-technologist:target {
+            animation: animation-fade-out 5s ease-in;
+        }
+        @keyframes animation-fade-out {
+            0% {
+                border: 1px dashed rgba(0, 60, 255, 0.650);
+            }
+        }
+    </style>
 
 {% endblock body %}

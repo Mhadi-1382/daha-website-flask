@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="Fa-IR" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="با اپلیکیشن داها میتونی خیلی راحت کارهای مربوط به دانشگاه خودت رو انجام بدی؛ کارهایی مثل دانلود چارت درسی، سامانه های مهم، دریافت اخبار و مسایل مربوط به دانشگاه و دانشجویان بصورت نوتیفیکیشن و ایمیل، دریافت جزوه های درسی، معرفی یا تبلیغ از کسب و کارت و کلی امکانات جذاب دیگه!">
+        <meta name="keywords" content="توسعه دهندگان داها، api daha، وب سرویس داها، ثبت نام توسعه دهندگان داها، داها، دانشکده علامه حسن زاده آملی، اپلیکیشن داها، اپلیکیشن اختصاصی دانشکده علامه حسن زاده آملی، کامپیوتر، فن آور در داها، چارت درسی در داها، پسران آمل، آمل، اپ داها، انجمن کامپیوتر، کسب و کارهای دانشجویان، پلتفرم داها، سایت بوستان، فنی و حرفه ای، دانشگاه فنی و حرفه ای، بوستان، علامه حسن زاده آملی، نرم افزار، دانشجو">
+        <meta name="author" content="محمد مهدی ربیعی">
+        <meta name="theme-color" content="#fff">
+        <meta name="robots" content="index, follow">
+
+        <!-- IMPORT CSS MAIN -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-landing.min.css') }}">
+        <!-- IMPORT FONT AWESOME -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/css/fontawesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/css/all.min.css') }}">
+
+        <!-- IMPORT FAVICON -->
+        <link rel="shortcut icon" href="{{ url_for('static', filename='media/imgs/icon.svg') }}" type="image/x-icon">
+        
+        <!-- TITLE -->
+        <title>APIs - داها</title>
+    </head>
+    <body>
+
+        <style>
+            header {
+                background: linear-gradient(rgba(255, 255, 255, 0.342), rgb(250, 250, 250)), url(/static/media/imgs/elements/hero@75.b2469a49.jpg);
+                background-position: center;
+                background-size: cover;
+                margin-top: 0px;
+            }
+            header .hero {
+                height: 20rem;
+            }
+            header .hero form {
+                left: 0;
+                right: 0;
+                top: 50px;
+                width: 350px;
+                margin: auto;
+                display: flex;
+                position: absolute;
+                border-radius: 20px;
+                align-items: center;
+                padding: 1.8rem 1rem;
+                flex-direction: column;
+                backdrop-filter: blur(10px);
+                transition: all 0.1s ease-in;
+                border: 1px solid rgb(236, 236, 236);
+                background-color: rgba(255, 255, 255, 0.570);
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.05) 0px 1.75rem 1.4375rem -0.4375rem, rgba(0, 0, 0, 0.04) 0px 0.75rem 0.75rem -0.4375rem;
+            }
+            header .hero form input:not(input[type='submit']) {
+                background-color: rgb(255, 255, 255);
+                border: 1px solid #ebebeb;
+                font-family: inherit;
+                padding: 0.6rem 1rem;
+                border-radius: 8px;
+                margin-bottom: 8px;
+                direction: rtl;
+                outline: none;
+                width: 100%;
+            }
+            header .hero form input:not(input[type='submit']):focus {
+                transition: all 0.2s ease-in;
+                border-color: #0044ff;
+            }
+            header .hero form input[type='submit'], .button {
+                transition: all 0.2s ease-in;
+                background-color: #0044ff;
+                font-family: inherit;
+                padding: 0.6rem 1rem;
+                border-radius: 8px;
+                margin-top: 0.5rem;
+                cursor: pointer;
+                color: #fff;
+                outline: none;
+                border: none;
+                width: 100%;
+            }
+            header .hero form input[type='submit']:focus, .button:focus {
+                transition: all 0.2s ease-in;
+                background-color: #003ce0;
+            }
+            
+            .web-service-grid {
+                gap: 0.8rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .web-service-grid a {
+                transition: all 0.1s ease-in;
+                width: 300px;
+            }
+            .card-web-service {
+                box-shadow: 0 0 1em rgba(150, 150, 150, 0.1);
+                transition: all 0.1s ease-in;
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 1rem 2rem;
+            }
+            .card-web-service h3 {
+                display: flex;
+                font-size: 1rem;
+                align-items: center;
+            }
+            .card-web-service h3 span {
+                margin-left: 10px;
+            }
+
+            details summary {
+                display: flex;
+                cursor: pointer;
+                list-style: none;
+                align-items: center;
+            }
+            details[open] summary .fa-angle-up {
+                rotate: 180deg;
+            }
+
+            pre, code {
+                background-color: #000;
+                font-family: monospace;
+                border-radius: 10px;
+                overflow: hidden;
+                overflow-x: scroll;
+                font-size: 14px;
+                padding: 1.5rem;
+                direction: ltr;
+                color: #fff;
+            }
+            video {
+                border-radius: 10px;
+                width: 100%;
+            }
+
+            .ul-web-service {
+                text-align: justify;
+                margin: 0 2rem;
+            }
+            .ul-web-service li {
+                list-style: disc;
+                margin: 0.5rem 0;
+            }
+
+            .alert-container {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .alert-animate-toggle {
+                display: flex !important;
+            }
+            .alert-container .alert {
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.05) 0px 1.75rem 1.4375rem -0.4375rem, rgba(0, 0, 0, 0.04) 0px 0.75rem 0.75rem -0.4375rem;
+                background-color: #fff;
+                border-radius: 9999px;
+                padding: 1rem 1.5rem;
+                width: fit-content;
+                position: fixed;
+                z-index: 5;
+                top: 30px;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+            .alert-container .alert li {
+                border-radius: 9999px;
+                margin-left: 10px;
+                height: 30px;
+                width: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .alert-container .alert li.fa-close {
+                background-color: rgb(251, 243, 238);
+                color: rgb(189, 72, 72);
+            }
+            .alert-container .alert li.fa-check {
+                background-color: rgb(238, 251, 239);
+                color: rgb(72 189 105);
+            }
+
+            @media (max-width: 800px) {
+                header .hero form {
+                    transition: all 0.2s ease-in;
+                    width: 90%;
+                }
+
+                .web-service-grid a {
+                    transition: all 0.2s ease-in;
+                    width: 100%;
+                }
+                .web-service-grid a .card-web-service {
+                    transition: all 0.2s ease-in;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+        </style>
+
+
+        <!-- ALERT -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == "error" %}
+                        <div class="alert-container">
+                            <div class="alert" id="alertDiplay">
+                                <li class="far fa-close"></li>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if category == "info" %}
+                        <div class="alert-container">
+                            <div class="alert" id="alertDiplay">
+                                <li class="far fa-check"></li>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+        <!-- HEADER/HERO -->
+        <header>
+            <div class="hero">
+                <div>
+                    <form action="/api_singup/" method="post">
+                        <a href="/"><img src="{{ url_for('static', filename='media/imgs/daha_logo.svg') }}" alt="ثبت نام توسعه دهندگان داها" draggable="false" style="width: 50px; margin-bottom: 20px;"></a>
+                        <h1 style="font-size: 1.2rem;">ثبت نام توسعه دهندگان</h1>
+                        <p style="text-align: center; font-size: 12px;">توسعه دهنده عزیز بعد از ثبت نام، کارشناسان ما با شما تماس خواهند گرفت و همچنین رمز عبور API برای شما ایمیل می شود.</p>
+                        
+                        <input type="text" name="usernameApi" placeholder="نام و نام خانوادگی" aria-placeholder="نام و نام خانوادگی" aria-label="نام و نام خانوادگی" required>
+                        <input type="email" name="emailApi" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+                        <input type="tel" name="numberApi" placeholder="شماره تماس" aria-placeholder="شماره تماس" aria-label="شماره تماس" required>
+
+                        <input type="submit" value="ثبت نام" aria-label="ثبت نام">
+
+                        <span style="text-align: center; font-size: 12px; margin-top: 20px;">ثبت نام در <h1 style="font-weight: 600; display: inline-block; font-size: 12px;">توسعه دهندگان داها</h1> به منزله مطالعه و پذیرش <a href="#terms" style="border-bottom: 1px solid; width: fit-content;">قوانین و مقرارت</a> استفاده از خدمات داها است.</span>
+                    </form>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- MAIN -->
+        <main>
+            <!-- DOCUMENTS -->
+            <section class="download" style="margin-top: 150px;">
+                <div class="download-container">
+                    <div>
+                        <h2><span></span> مستندات وب سرویس ها (APIs)</h2>
+                        <h4 style="margin: 0 0 20px 0;">وب سرویس یا API چیست؟</h4>
+                        <p style="margin-bottom: 20px;">API مخفف <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface است. وب سرویس مجموعه ای از پروتکل ها، روندها و ابزارهایی است که به نرم افزارهای مختلف اجازه می دهد تا با یکدیگر ارتباط برقرار کنند. وب سرویس ها به عنوان پلی بین دو یا چند برنامه عمل می کنند و به آنها اجازه می دهند داده ها و عملکردهای خود را با یکدیگر به اشتراک بگذارند.</p>
+                        <p style="margin-bottom: 20px;">سرویس API برای دسترسی به اطلاعات پلتفرم داها طراحی شده است تا توسعه دهندگان بتوانند به راحتی از بخش های مختلف پلتفرم استفاده کنند. با استفاده از وب سرویس ها می توانید عملکردهایی همچون دریافت اطلاعات دقیق کاربران، آگهی های ثبت شده در قسمت فن آور و... را در برنامه خود داشته باشید.</p>
+
+                        <details open>
+                            <summary><h3 style="margin: 20px 0;">وب سرویس ها</h3> <span class="far fa-angle-up" style="margin-right: 10px;"></span></summary>
+                            <div class="web-service-grid">
+                                <a href="#webServiceUsers">
+                                    <div class="card-web-service">
+                                        <h3><span class="far fa-code-commit"></span> وب سرویس کاربران (Users)</h3>
+                                    </div>
+                                </a>
+                                <a href="#webServiceUsersEmail">
+                                    <div class="card-web-service">
+                                        <h3><span class="far fa-code-commit"></span> وب سرویس ایمیل کاربران (Users Email)</h3>
+                                    </div>
+                                </a>
+                                <a href="#webServiceAds">
+                                    <div class="card-web-service">
+                                        <h3><span class="far fa-code-commit"></span> وب سرویس آگهی (Ads)</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </details>
+
+                        <h3 style="margin: 50px 0 20px 0; padding-top: 10px;" id="ConnectApi">نحوه متصل شدن به API</h3>
+                        <p>بعد از ثبت نام و دریافت رمز عبور (برای احراز هویت) میتوانید به راحتی به وب سرویس ها متصل شوید، برای اتصال به وب سرویس شما به نام کاربری یا همان ایمیلی که هنگام ثبت نام وارد کردید و رمز عبوری که از طرف کارشناسان ما برای شما ایمیل میشود نیاز دارید.</p>
+                        <a href="/api/doc/" style="border-bottom: 1px solid; width: fit-content; display: flex; align-items: center;">تست و مستند APIs Swagger <span class="far fa-external-link" style="margin-right: 10px;"></span></a>
+                        <h4 style="margin: 20px 0;">نحوه تست در APIs Swagger</h4>
+                        <video src="{{ url_for('static', filename='media/videos/APIs_Swagger_Daha.mp4') }}" controls preload="auto"></video>
+                        <h4 style="margin: 20px 0;">نحوه اتصال در پایتون</h4>
+                        <pre>
+import requests as rq
+from requests.auth import HTTPBasicAuth
+
+USERNAME = ""
+PASSWORD = ""
+
+URL = "https://dahauni.ir/api/APINAME"
+
+response = rq.get(URL, auth=HTTPBasicAuth(username=USERNAME, password=PASSWORD))
+print(response.json())
+</pre>
+
+                        <h4 style="margin: 20px 0;">پارامتر های ورودی</h4>
+                        <ul class="ul-web-service">
+                            <li>USERNAME: در این متغییر باید آدرس ایمیل خود که هنگام ثبت نام وارد کردید را قرار دهید.</li>
+                            <li>PASSWORD: در این متغییر باید رمز عبوری که برای شما ایمیل شده است را قرار دهید.</li>
+                            <li>URL: در این متغییر باید آدرس وب سرویس مورد نظر خود را قرار دهید، البته آدرس https://dahauni.ir/api/ ثابت می باشد و شما فقط باید APINAME یا نام وب سرویس را وارد کنید، برای دریافت نام یا دسته بندی وب سرویس ها میتوانید از <a href="/api/doc/" style="border-bottom: 1px solid; width: fit-content;">تست و مستند APIs Swagger</a> استفاده کنید.</li>
+                        </ul>
+
+                        <a href="#webServiceUsers" id="webServiceUsers" style="margin: 50px 0 20px 0;">
+                            <h3 style="margin: 10px 0 0 0; display: flex; align-items: center; font-weight: 300;">
+                                <span class="far fa-hashtag" style="margin-left: 10px;"></span> وب سرویس کاربران (Users)</h3>
+                        </a>
+                        <p>از طریق <strong>وب سرویس کاربران (Users)</strong> به سادگی می توانید اطلاعاتی نظیر نام، ایمیل و موارد دیگر دانشجویان را دریافت کنید. <a href="#ConnectApi" style="border-bottom: 1px solid; width: fit-content; display: flex; align-items: center;">نحوه متصل شدن به API <span class="far fa-reply" style="margin-right: 10px;"></span></a></p>
+                        <h4 style="margin: 20px 0;">آدرس API</h4>
+                        <pre>
+https://dahauni.ir/api/users
+</pre>
+                        <a href="#webServiceUsersEmail" id="webServiceUsersEmail" style="margin: 50px 0 20px 0;">
+                            <h3 style="margin: 10px 0 0 0; display: flex; align-items: center; font-weight: 300;">
+                                <span class="far fa-hashtag" style="margin-left: 10px;"></span> وب سرویس ایمیل کاربران (Users Email)</h3>
+                        </a>
+                        <p>از طریق <strong>وب سرویس ایمیل کاربران (Users Email)</strong> به سادگی می توانید ایمیل دانشجویان را دریافت کنید. <a href="#ConnectApi" style="border-bottom: 1px solid; width: fit-content; display: flex; align-items: center;">نحوه متصل شدن به API <span class="far fa-reply" style="margin-right: 10px;"></span></a></p>
+                        <h4 style="margin: 20px 0;">آدرس API</h4>
+                        <pre>
+https://dahauni.ir/api/users_email
+</pre>
+
+                        <a href="#webServiceAds" id="webServiceAds" style="margin: 50px 0 20px 0;">
+                            <h3 style="margin: 10px 0 0 0; display: flex; align-items: center; font-weight: 300;">
+                                <span class="far fa-hashtag" style="margin-left: 10px;"></span> وب سرویس آگهی (Ads)</h3>
+                        </a>
+                        <p>از طریق <strong>وب سرویس آگهی (Ads)</strong> به سادگی می توانید اطلاعاتی نظیر آدرس عکس، نام و نام خانوادگی، عنوان شغل، عنوان آگهی، ایمیل، شماره تماس، دسته بندی، آدرس محل کار، توضیحات، تاریخ ثبت و انقضا را دریافت کنید. <a href="#ConnectApi" style="border-bottom: 1px solid; width: fit-content; display: flex; align-items: center;">نحوه متصل شدن به API <span class="far fa-reply" style="margin-right: 10px;"></span></a></p>
+                        <h4 style="margin: 20px 0;">آدرس API</h4>
+                        <pre>
+https://dahauni.ir/api/ads
+</pre>
+                        
+                        <br>
+                        <h3 style="margin: 50px 0 20px 0;">لیست کدها و خطاها</h3>
+                        <p>با فراخونی API احتمال دارد شما با کد ها و خطاهای زیر روبه رو شوید. این کد ها عبارتند از:</p>
+                        <ul class="ul-web-service">
+                            <li>200: نشان دهنده موفقیت آمیز بودن اتصال شما به API می باشد.</li>
+                            <li>404 یا Not Found: نشان دهنده این است که آدرس مورد نظر وجود ندارد، که احتمال دارد آدرس API را اشتباه وارد کرده باشید.</li>
+                            <li>Authentication failed: نشان دهنده مشکل در اتصال شما به API، که در اثر نادرست بودن نام کاربری یا رمز عبور می باشد.</li>
+                        </ul>
+
+                        <h3 style="margin: 50px 0 20px 0;" id="terms">قوانین و مقرارت استفاده از APIs</h3>
+                        <p>توسعه دهنده عزیز، بعد از ثبت نام در <strong>توسعه دهندگان داها</strong> شما بصورت رسمی مجوز استفاده از اطلاعات دیتابیس (بصورت محدود) را خواهید داشت، بر این اساس شما باید تابع قوانین تعریف شده باشید، قوانین عبارتند از:</p>
+                        <!-- 10 LINE -->
+                        <ul class="ul-web-service">
+                            <li>توسعه دهنده اجازه ندارد از اطلاعات در جهت تبلیغات، سوء استفاده، فروش اطلاعات، تهدید، نفوذ، هک و... استفاده نمایید، اگر داها متوجه این تخلفات شود با فرد خاطی برخورد و حساب او را نیز مسدود می کند.</li>
+                            <li>استفاده از اطلاعات تنها با ذکر منبع (نام داها) امکان پذیر است.</li>
+                            <li>تلاش برای نفوذ و استخراج اطلاعات و استفاده از هر گونه ربات جهت دسترسی خودکار به سایت و پایگاه داده های داها و برداشت اطلاعات از آن ممنوع است.</li>
+                            <li>تلاش برای رمزگشایی و کنکاش از کدهای منبع داها ممنوع است.</li>
+                            <li>از کار انداختن و ایجاد هر گونه اختلال در سرویس های داها ممنوع است.</li>
+                            <li>انتقال کدهای مخرب، ویروس ها، کرم های رایانه ای و... به داها ممنوع است.</li>
+                            <li>حفظ حریم خصوصی کاربران ضروری است.</li>
+                            <li>هیچ فرد حقیقی، حقوقی یا سازمانی مجاز به تغییر محتوای داها نیست.</li>
+                            <li>اگر توسعه دهنده ای ایده ای جهت توسعه پلتفرم داها دارد حتما آن را با ما در میان بگذارد.</li>
+                            <li>داها این حق را دارد تا در هر زمانی که نیاز بود، قوانین و مقرارت را تغییر دهد و توسعه دهندگان باید از قوانین جدید پیروی و آن را دنبال کنند.</li>
+                            <p style="margin: 20px 0; font-weight: bold;">استفاده از وب سرویس های داها (APIs Daha) به منزله مطالعه و پذیرش قوانین و مقرارت استفاده از خدمات داها است.</p>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section class="contact">
+                <div class="contact-container">
+                    <h4>راه های ارتباطی با ما</h4>
+                    <ul>
+                        <a href="tel:09031265448"><span class="far fa-phone"></span> ارتباط از طریق تماس تلفنی</a>
+                        <a href="https://eitaa.com/Mahdirabiee"><span class="far fa-send"></span> ارتباط از طریق پیام رسان ایتا</a>
+                        <a href="mailto:info.daha.uni@gmail.com"><span class="far fa-envelope"></span> ارتباط از طریق ارسال ایمیل</a>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p>کلیه حقوق مادی و معنوی سایت برای داها محفوظ است.</p>
+        </footer>
+
+
+        <!-- SCRIPT -->
+        <script>
+            var alertDiplay = document.getElementById("alertDiplay");
+
+            alertDiplay.classList.add("alert-animate-toggle");
+            setTimeout(() => {
+                alertDiplay.classList.remove("alert-animate-toggle");
+            }, 5000);
+
+        </script>
+    
+    </body>
+</html>

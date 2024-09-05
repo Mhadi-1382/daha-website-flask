@@ -21,22 +21,63 @@
 
     <div class="form-in">
         <!-- FORM: LOGIN -->
-        <form action="/login" method="post">
+        <form action="/login/" method="post">
             <!-- LOGO DAHA -->
-            <img src="{{ url_for('static', filename='media/images/icon.svg') }}" alt="logo daha" class="form-in-logo" draggable="false">
+            <img src="https://dahauni.ir/static/media/images/icon.svg" alt="logo daha" class="form-in-logo" draggable="false">
 
             <h4 style="margin-top: 120px;">ورود به حساب کاربری</h4>
             <p style="margin-top: -15px; margin-bottom: 20px; font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
 
             <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
-            <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+            <input type="email" name="email" id="userNameLogin" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
             <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
+            
+            <div style="margin: 10px 0; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <a href="javascript:modalPossibilities5Func()" style="font-size: 12px; margin: 0; font-weight: 500;" class="link-singin-conditions"><span class="far fa-sign-in"></span> ورود استاتید</a>
+            </div>
+
             <input type="submit" value="ورود" aria-label="ورود" id="eventSubmitLogin" onclick="eventSubmitLoginFunc()">
 
             <!-- LOGIN LINK -->
             <a href="{{url_for('singup')}}">در داها ثبت‌ نام نکرده اید؟ ثبت نام</a>
-            <a href="{{url_for('forget_password')}}">فراموشی رمز عبور</a>
+            <a href="{{url_for('forget_password')}}">بازیابی رمز عبور</a>
         </form>
     </div>
+
+    <!-- MODAL: LOGIN TEACHER -->
+    <div class="modal-overlay" id="modalPossibilities5">
+        <i onclick="modalPossibilities5Func()"></i>
+        <div class="modal">
+            <div class="modal-line" onclick="modalPossibilities5Func()"></div>
+            <div class="modal-header" style="text-align: center;">
+                <h4>ورود به حساب کاربری</h4>
+                <p style="font-size: 14px; color: #505050;">لطفا مشخصات کاربری خود را وارد کنید.</p>
+            </div>
+            <div class="modal-body" style="margin-top: 25px;">
+                <!-- FORM: LOGIN TEACHER -->
+                <form action="/login_teacher/" method="post">
+                    <input type="text" name="userName" placeholder="نام کاربری" aria-placeholder="نام کاربری" aria-label="نام کاربری" required>
+                    <input type="email" name="email" placeholder="ایمیل" aria-placeholder="ایمیل" aria-label="ایمیل" required>
+                    <input type="tel" name="teacherUniqueCode" placeholder="کد ملی" aria-placeholder="کد ملی" aria-label="کد ملی" required maxlength="10">
+                    <input type="password" name="password" placeholder="رمز عبور" aria-placeholder="رمز عبور" aria-label="رمز عبور" required>
+
+                    <input type="submit" value="ورود" aria-label="ورود" id="eventSubmitLogin" onclick="eventSubmitLoginFunc()">
+
+                    <div id="hints">
+                        <h4><span class="far fa-exclamation-circle"></span> راهنما</h4>
+                        <li style="font-weight: bold;">این قابلیت برای استاتید طراحی شده تا بتوانند به حساب خود دسترسی داشته باشند.</li>
+                        <li style="font-weight: bold;">استاد گرامی، در صورت عدم ورود به حساب کاربری یا بروز مشکل، یک حساب معمولی (بدون کد ملی) ایجاد کرده و به پشتیبانی تیکت بزنید.</li>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #modalPossibilities5 .modal input:nth-child(3),
+        #modalPossibilities5 .modal input:nth-child(4) {
+            background-color: #f8f8f8;
+        }
+    </style>
 
 {% endblock body %}

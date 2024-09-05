@@ -1,0 +1,56 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}در این بخش شما می توانید به اعلاناتی که اساتید ثبت میکنند دسترسی داشته باشید، که میتواند شامل موضوعات مختلف باشد (اعلام تاریخ برگزاری امتحانات یا عدم تشکیل کلاس و ...){% endblock des %}
+{% block key %}داها، اعلانات اساتید، اعلانات اساتید داها{% endblock key %}
+{% block title %}اعلانات اساتید - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left">
+                <!-- TEACHERS NOTIFICATIONS -->
+                <div class="teachers-notifications">
+                    <!-- NOTE -->
+                    <div class="note">
+                        <li class="far fa-info-circle"></li>
+                        <p>در این بخش شما می توانید به اعلاناتی که اساتید ثبت میکنند دسترسی داشته باشید، که میتواند شامل موضوعات مختلف باشد (اعلام تاریخ برگزاری امتحانات یا عدم تشکیل کلاس و ...)</p>
+                    </div>
+
+                    <div class="grid-sidebar-left-2" style="top: 0; padding: 0; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+                        {% if cursor_teachers_notifications_show | length >= 1 %}
+                            {% for teachers_notifications in cursor_teachers_notifications_show %}
+                                <div class="teachers-notifications-card" id="id={{teachers_notifications[0]}}">
+                                    <li><span>{{ teachers_notifications[0] }}</span> <strong>{{ teachers_notifications[1] }}</strong></li>
+                                    <div>
+                                        <h4>{{ teachers_notifications[2] }}</h4>
+                                        <p>{{ teachers_notifications[3] }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #808080;">موردی یافت نشده است.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    {% include 'includes/daha_voice_assistant.html' %}
+
+{% endblock body %}

@@ -17,6 +17,7 @@
 
         </aside>
         <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
             <div class="background-image" style="background-color: transparent;">
                 {% include 'includes/navbar_mobile.html' %}
             </div>
@@ -54,5 +55,7 @@
             </div>
         </aside>
     </div>
+
+    {% include 'includes/daha_voice_assistant.html' %}
 
 {% endblock body %}

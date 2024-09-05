@@ -19,6 +19,7 @@
 
         </aside>
         <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
             <div class="background-image" style="background-color: transparent;">
                 {% include 'includes/navbar_mobile.html' %}
             </div>
@@ -103,6 +104,16 @@
                         </div>
                     </div>
                 </a>
+                <a href="{{ url_for('teachers_notifications') }}" title="اعلانات اساتید" aria-label="اعلانات اساتید">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='media/images/icon-cards/solid/40-Free-SEO-icons-60.png') }}" alt="" draggable="false">
+                        </div>
+                        <div class="card-body">
+                            <p>اعلانات اساتید</p>
+                        </div>
+                    </div>
+                </a>
                 <a href="{{ url_for('publishers') }}" title="انتشارات" aria-label="انتشارات">
                     <div class="card">
                         <div class="card-header">
@@ -117,12 +128,14 @@
         </aside>
     </div>
 
+    {% include 'includes/daha_voice_assistant.html' %}
+
     <!-- MODAL: ALERT HOMEPAGE -->
     <div class="modal-overlay" id="modalAlertHomepage">
         <i onclick="modalAlertHomepageFunc()"></i>
         <div class="modal">
             <div class="modal-line" onclick="modalAlertHomepageFunc()">
-                <img src="../static/media/images/elements/megaphone.png" alt="" width="53px">
+                <img src="../static/media/images/elements/megaphone.png" alt="" width="53px" draggable="false">
             </div>
             <div class="modal-header"></div>
             <div class="modal-body">

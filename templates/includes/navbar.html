@@ -3,19 +3,23 @@
 <nav>
     <ul>
         <div style="margin-bottom: 30px;">
-            <!-- LOGO -->
-            <a href="{{ url_for('index') }}" style="display: flex; align-items: center;">
-                <img src="{{ url_for('static', filename='media/images/daha_logo.svg') }}" alt="داها" id="dahaLogoForLight" width="50" draggable="false">
-                <img src="{{ url_for('static', filename='media/images/daha_logo_light.svg') }}" alt="داها" id="dahaLogoForDark" width="50" draggable="false" style="display: none;">
-
-                <p class="badge badge-blue" style="margin-right: 7px;">v{{ _ver }}</p>
-            </a>
-            <li class="far fa-close" onclick="toggleNavbarMobile()" title="خروج"></li>
+            <!-- LOGO & ICONS -->
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center;">
+                    <a href="{{ url_for('index') }}">
+                        <img src="{{ url_for('static', filename='media/images/daha_logo.svg') }}" alt="داها" id="dahaLogoForLight" width="50" draggable="false">
+                        <img src="{{ url_for('static', filename='media/images/daha_logo_light.svg') }}" alt="داها" id="dahaLogoForDark" width="50" draggable="false" style="display: none;">
+                    </a>
+                    <p class="badge badge-blue" onclick="modalVersionChangesFunc()" style="margin-right: 7px; cursor: pointer;">v{{ _ver }}</p>
+                </div>
+                <li class="far fa-bell" onclick="modalNotificationsFunc()" title="نوتیفیکیشن ها" style="display: none;"></li>
+            </div>
+            <li class="far fa-close" onclick="toggleNavbarMobile()" title="خروج" style="margin-left: 0;"></li>
         </div>
 
         <!-- USER AVATAR WARPPER -->
         <div class="user-avatar-warpper" onclick="toggleDropdownUserAvatarWarpper()">
-            <a href="javascript:void()">
+            <a href="javascript:void(0)">
                 <div>
                     {% if session_user_name_filter == "ا" or session_user_name_filter == "a" or session_user_name_filter == "A" %}
                         <li class="user-avatar">{{ session_user_name_filter }}</li>
@@ -73,23 +77,25 @@
                 <a href="javascript:toggleThemeModeDark()" id="toggleModeTextMoon" title="تم تاریک"><li><span class="far fa-moon"></span></span> تم تاریک</li></a>
                 <a href="javascript:toggleThemeModelight()" id="toggleModeTextSun" style="display: none;" title="تم روشن"><li><span class="far fa-sun"></span> تم روشن</li></a>
                 {% if session_user_email == email_admin %}
-                    <a href="javascript:modalHelpAdminFunc()"><li><span class="far fa-circle-question"></span>راهنمای مدیر</li></a>
+                    <a href="javascript:modalHelpAdminFunc()"><li><span class="far fa-circle-question"></span> راهنمای مدیر</li></a>
                 {% else %}
-                    <a href="javascript:modalDeleteAccountFunc()" style="color: red;"><li><span class="far fa-trash"></span> حذف حساب کاربری</li></a>
+                    <a href="javascript:modalDeleteAccountFunc()" style="color: #ff0000;"><li><span class="far fa-trash"></span> حذف حساب کاربری</li></a>
                 {% endif %}
             </div>
         </div>
 
         <!-- MENU -->
         <a href="{{ url_for('index') }}"><li><span class="far fa-home"></span> <span>خانه</span></li></a>
-        <a href="{{ url_for('download') }}"><li><span class="far fa-download"></span> <span>دانلود اپلیکیشن</span></li></a>
+        <a href="{{ url_for('dl') }}"><li><span class="far fa-download"></span> <span>دانلود اپلیکیشن</span></li></a>
         <a href="javascript:modalCommentFunc()"><li><span class="far fa-comment"></span> <span>نظر سنجی</span></li></a>
         <a href="javascript:modalAboutFunc()"><li><span class="far fa-info-circle"></span> <span>درباره ما</span></li></a>
-        <a href="javascript:modalSupportFunc()"><li><span class="far fa-phone"></span> <span>پشتیبانی</span></li></a>
+        <a href="javascript:modalSupportFunc()"><li><span class="far fa-headset"></span> <span>پشتیبانی</span></li></a>
     </ul>
     <ul>
         {% if session_user_email == email_admin %}
             <a href="{{ url_for('admin') }}"><li><span class="far fa-dashboard"></span> <span>داشبورد مدیر</span></li></a>
+        {% elif session['teacherUniqueCode'] %}
+            <a href="{{ url_for('panel_teacher') }}"><li><span class="far fa-dashboard"></span> <span>داشبورد اساتید</span></li></a>
         {% endif %}
 
         <a href="{{ url_for('logout') }}"><li><span class="far fa-sign-out"></span> <span>خروج از حساب کاربری</span></li></a>

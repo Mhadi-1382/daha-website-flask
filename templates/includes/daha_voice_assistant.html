@@ -1,0 +1,43 @@
+
+<!-- DAHA VOICE ASSISTANT -->
+<!-- ACTION BUTTON -->
+<div class="action-button" id="actionButton" onclick="modalDahaVoiceAssistantFunc()" title="دستیار صوتی داها">
+    <button><img src="{{ url_for('static', filename='media/images/logo_DahaAssistant_B.svg') }}" alt="Daha Assistant" draggable="false" width="30"></button>
+</div>
+
+<!-- MODAL: DAHA VOICE ASSISTANT -->
+<div class="modal-overlay" id="modalDahaVoiceAssistant">
+    <i onclick="modalDahaVoiceAssistantFunc()"></i>
+    <div class="modal">
+        <!-- <div class="modal-line" onclick="modalDahaVoiceAssistantFunc()"></div> -->
+        <div class="modal-header">
+            <div style="display: flex; align-items: center; margin: 0 auto 15px auto;">
+                <img src="{{ url_for('static', filename='media/images/logo_DahaAssistant_B.svg') }}" alt="Logo Daha Assistant" draggable="false">
+                <span class="badge badge-blue" style="font-size: 0.65rem; margin-right: 5px;">BETA</span>
+            </div>
+            <li id="queryLive">سلام، چطور می تونم به شما کمک کنم؟</li>
+        </div>
+        <div class="modal-body">
+            <div>
+                <li class="badge badge-dvs" onclick="majors();">رشته ها</li>
+                <li class="badge badge-dvs" onclick="sites();">سامانه ها</li>
+                <li class="badge badge-dvs" onclick="food_reservation();">رزرو غذا</li>
+                <li class="badge badge-dvs" onclick="bustan();">بوستان</li>
+                <li class="badge badge-dvs" onclick="forums();">انجمن ها</li>
+                <li class="badge badge-dvs" onclick="technologist();">فن آور</li>
+                <li class="badge badge-dvs" onclick="events();">رویداد ها</li>
+                <li class="badge badge-dvs" onclick="map_allameh_hassanzadeh_amoli();">نقشه دانشکده</li>
+                <li class="badge badge-dvs" onclick="publishers();">انتشارات</li>
+                <li class="badge badge-dvs" onclick="edit_info();">ویرایش اطلاعات</li>
+                <li class="badge badge-dvs" onclick="toggleTheme();">حالت شب</li>
+                <li class="badge badge-dvs" onclick="toggleTheme();">حالت روز</li>
+            </div>
+            <button class="far fa-microphone" id="buttonMicrophoneClicked" onclick="startAnnyang()"></button>
+        </div>
+        <div class="indicator" id="indicatorMicrophoneClicked"></div>
+    </div>
+</div>
+
+<!-- IMPORT JS Daha Voice Assistant -->
+<script src="{{ url_for('static', filename='js/lib/annyang.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dahaVoiceAssistant-config.js') }}"></script>

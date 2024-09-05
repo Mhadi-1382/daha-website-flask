@@ -1,0 +1,255 @@
+
+{% extends 'includes/base.html' %}
+
+{% block des %}با اپلیکیشن داها میتونی خیلی راحت کارهای مربوط به دانشگاه خودت رو انجام بدی؛ کارهایی مثل دانلود چارت درسی، سامانه های مهم، دریافت اخبار و مسایل مربوط به دانشگاه و دانشجویان بصورت نوتیفیکیشن و ایمیل، دریافت جزوه های درسی، معرفی یا تبلیغ از کسب و کارت و کلی امکانات جذاب دیگه!{% endblock des %}
+{% block key %}داها، دانشکده علامه حسن زاده آملی، اپلیکیشن داها، اپلیکیشن اختصاصی دانشکده علامه حسن زاده آملی، کامپیوتر، فن آور در داها، چارت درسی در داها، پسران آمل، آمل، اپ داها، انجمن کامپیوتر، کسب و کارهای دانشجویان، پلتفرم داها، سایت بوستان، فنی و حرفه ای، دانشگاه فنی و حرفه ای، بوستان، علامه حسن زاده آملی، نرم افزار، دانشجو، رشته ها، سامانه ها، رزرو غذا، انجمن ها، رویدادها، انتشارات{% endblock key %}
+{% block title %}داشبورد استاتید > {{ session_user_name }} - داها{% endblock title %}
+
+
+{% block body %}
+
+    {% include 'includes/splash_screen.html' %}
+
+    {% include 'includes/modal.html' %}
+
+    <div class="container-main index">
+        <aside class="sidebar-right" id="navbarMobileSidebarRight">
+
+            {% include 'includes/navbar.html' %}
+
+        </aside>
+        <aside class="sidebar-left" id="sidebarRight">
+            <a href="javascript:toggleNavbarMobile()" id="actionLinkClickToggle" style="display: none; position: fixed; inset: 0; z-index: 20; width: 100%; height: 100%;"></a>
+            <div class="background-image" style="background-color: transparent;">
+                {% include 'includes/navbar_mobile.html' %}
+            </div>
+            <div class="grid-sidebar-left">
+                <!-- NUMBER PUBLISHERS -->
+                <div class="card-info" style="border: none; height: auto; background-color: #f0fff0;">
+                    <div class="card-info-body">
+                        <div>
+                            {% if number_publishers_teacher %}
+                                <h4>{{ number_publishers_teacher }} جزوه</h4>
+                            {% else %}
+                                <h4><span style="font-size: 0.98rem;">0</span> جزوه</h4>
+                            {% endif %}
+                            <p>تعداد تمام جزوه ها</p>
+                        </div>
+                        <li class="far fa-file-text publishers-icon"></li>
+                    </div>
+                </div>
+                <!-- NUMBER USERS -->
+                <div class="card-info" style="border: none; height: auto; background-color: #f0fff0;">
+                    <div class="card-info-body">
+                        <div>
+                            {% if number_teachers_notifications %}
+                                <h4>{{ number_teachers_notifications }} اعلان</h4>
+                            {% else %}
+                                <h4><span style="font-size: 0.98rem;">0</span> اعلان</h4>
+                            {% endif %}
+                            <p>تعداد تمام اعلان ها</p>
+                        </div>
+                        <li class="far fa-users users-icon"></li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION CONTENT -->
+            <!-- SECTION POSSIBILITIES -->
+            <section class="section-content">
+                <!-- TITLE HEADER -->
+                <div class="title-header">
+                    <h3 class="possibilities-title">امکانات</h3>
+                </div>
+                <!-- BUTTONS -->
+                <div>
+                    <a href="javascript:modalPossibilities1Func()"><button class="btn-main"><span class="far fa-file-text"></span> بارگذاری جزوه</button></a>
+                    <a href="javascript:modalPossibilities5Func()"><button class="btn-main"><span class="far fa-megaphone"></span>ثبت اعلانات</button></a>
+                </div>
+
+                <!-- MODALS -->
+                <!-- MODAL: POSSIBILITIES 1 -->
+                <div class="modal-overlay" id="modalPossibilities1">
+                    <i onclick="modalPossibilities1Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities1Func()"></div>
+                        <div class="modal-header">
+                            <h4>بارگذاری جزوه</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: PUBLISHERS 1 -->
+                            <form action="/user/panel/teacher/publishers/" method="post">
+                                <input type="text" name="titleHandout" placeholder="نام استاد، عنوان رشته، نام درس" aria-placeholder="نام استاد، عنوان رشته، نام درس" aria-label="نام استاد، عنوان رشته، نام درس" required>
+                                <input type="url" name="linkHandout" placeholder="لینک فایل" aria-placeholder="لینک فایل" aria-label="لینک فایل" required>
+                                <input type="submit" value="بارگذاری" aria-label="بارگذاری">
+
+                                <div id="hints">
+                                    <h4><span class="far fa-exclamation-circle"></span> راهنما</h4>
+                                    <li>در قسمت اول (نام استاد، عنوان رشته، نام درس) سعی شود الگو ذکر شده رعایت شود.</li>
+                                    <li>مثال: محمد مهدی ربیعی، کامپیوتر، سیستم عامل</li>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL: POSSIBILITIES 5 -->
+                <div class="modal-overlay" id="modalPossibilities5">
+                    <i onclick="modalPossibilities5Func()"></i>
+                    <div class="modal">
+                        <div class="modal-line" onclick="modalPossibilities5Func()"></div>
+                        <div class="modal-header">
+                            <h4>ثبت اعلانات</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- FORM: SEND EMAIL & SEND NOTIFY & SAVE TEACHERS NOTIFICATIONS -->
+                            <form action="/user/panel/teacher/notifications/" method="post">
+                                <input type="text" name="nameAndClassTeachersNotifications" placeholder="نام استاد، عنوان رشته، نام درس" aria-placeholder="نام استاد، نام درس یا کلاس" aria-label="نام استاد، نام درس یا کلاس" required maxlength="500">
+                                <input type="text" name="titleTeachersNotifications" placeholder="موضوع اعلان" aria-placeholder="موضوع اعلان" aria-label="موضوع اعلان" required maxlength="500">
+                                <textarea name="desTeachersNotifications" rows="5" placeholder="متن اعلان" aria-placeholder="متن اعلان" aria-label="متن اعلان" required></textarea>
+                                <input type="submit" value="ثبت" aria-label="ثبت">
+                                
+                                <div id="hints">
+                                    <h4><span class="far fa-exclamation-circle"></span> راهنما</h4>
+                                    <li>در قسمت اول (نام استاد، عنوان رشته، نام درس) سعی شود الگو ذکر شده رعایت شود.</li>
+                                    <li>مثال: محمد مهدی ربیعی، کامپیوتر، سیستم عامل</li>
+                                    <li style="font-weight: bold;">بعد از کلیک روی دکمه ثبت، پروسه ارسال ایمیل (ممکن است کمی زمان ببرد)، نوتیفیکیشن و همچنین در صفحه اعلانات استاتید هم ثبت و قابل مشاهده است.</li>
+                                    <li style="font-weight: bold;">لطفا در زمان انجام پروسه از صفحه خارج نشوید بطور خودکار صفحه بروز میشود و اگر با خطای مشکل ارسال اعلان مواجه شدید به پشتیبانی تیکت بزنید.</li>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TITLE HEADER -->
+                <div class="title-header" style="margin-top: 50px;">
+                    <h3 class="publishers-title">جزوه ها</h3>
+                </div>
+
+                {% if show_publishers_teacher %}
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li>عنوان جزوه</li>
+                            <li>لینک فایل</li>
+                            <li>تاریخ ثبت</li>
+                            
+                            <li class="form-toolbox-li">
+                                <form action="" method="post" class="form-toolbox">
+                                    <button type="submit" title="حذف" class="badge" disabled><span class="far fa-trash"></span></button>
+                                </form>
+                            </li>
+                        </div>
+                        {% for publishers_teacher in show_publishers_teacher %}
+                            <div class="table-body table-body-users">
+                                <li>{{publishers_teacher[0]}}</li>
+                                <li style="white-space: nowrap;"><a href="{{publishers_teacher[2]}}">{{publishers_teacher[1]}}</a></li>
+                                <li style="white-space: nowrap;"><a href="{{publishers_teacher[2]}}">{{publishers_teacher[2]}}</a></li>
+                                <li>{{publishers_teacher[3]}}</li>
+
+                                <li class="form-toolbox-li">
+                                    <form action="/user/panel/delete_publisher_teacher/{{publishers_teacher[0]}}" method="post" class="form-toolbox">
+                                        <button type="submit" title="حذف" class="badge badge-red"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </li>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                {% endif %}
+
+                <!-- TITLE HEADER -->
+                <div class="title-header" style="margin-top: 50px;">
+                    <h3 class="users-title">اعلانات</h3>
+                </div>
+
+                {% if show_teachers_notifications %}
+                    <!-- TABLE CONTAINER -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <li>ردیف</li>
+                            <li style="font-size: 13px;">نام استاد، عنوان رشته، نام درس</li>
+                            <li>موضوع اعلان</li>
+                            <li>متن اعلان</li>
+                            <li>تاریخ ثبت</li>
+                            
+                            <li class="form-toolbox-li">
+                                <form action="" method="post" class="form-toolbox">
+                                    <button type="submit" title="حذف" class="badge" disabled><span class="far fa-trash"></span></button>
+                                </form>
+                            </li>
+                        </div>
+                        {% for teachers_notifications in show_teachers_notifications %}
+                            <div class="table-body table-body-users">
+                                <li>{{teachers_notifications[0]}}</li>
+                                <li>{{teachers_notifications[1]}}</li>
+                                <li title="{{teachers_notifications[2]}}">{{teachers_notifications[2]}}</li>
+                                <input type="text" title="{{teachers_notifications[3]}}" value="{{teachers_notifications[3]}}">
+                                <li>{{teachers_notifications[4]}}</li>
+
+                                <li class="form-toolbox-li">
+                                    <form action="/user/panel/delete_teachers_notifications/{{teachers_notifications[0]}}" method="post" class="form-toolbox">
+                                        <button type="submit" title="حذف" class="badge badge-red"><span class="far fa-trash"></span></button>
+                                    </form>
+                                </li>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p style="color: #808080; margin-top: 10px;">موردی یافت نشده است.</p>
+                {% endif %}
+            </section>
+        </aside>
+    </div>
+
+    {% include 'includes/daha_voice_assistant.html' %}
+
+    <style>
+        .toggleMode .table-body input,
+        .toggleMode .table-body input:hover,
+        .toggleMode .table-body input:focus {
+            background-color: transparent !important;
+        }
+        .table-body input,
+        .table-body input:hover,
+        .table-body input:focus {
+            all: unset;
+        }
+
+        .table-container li.form-toolbox-li {
+            width: 50px;
+            display: flex;
+            overflow: visible;
+            align-items: center;
+            justify-content: center;
+        }
+        form.form-toolbox {
+            margin: auto;
+            display: flex;
+            margin-left: 3px;
+            align-items: center;
+        }
+        form.form-toolbox button .far {
+            margin: 0;
+        }
+    </style>
+
+    <script>
+        // ASK SECRET KEY
+        function askSecretKey(key) {
+            var secretKey = key;
+            var askSecretKeyPrompt = prompt("لطفا کلید امنیتی را وارد کنید؟");
+
+            if (askSecretKeyPrompt == secretKey) {
+                console.log("SECRET_KEY_SECURE");
+            } else {
+                console.log("SECRET_KEY_NOT_SECURE");
+                window.location.href = "/login";
+            }
+        }
+
+        askSecretKey("{{ show_teachers[0][6] }}");
+    </script>
+
+{% endblock body %}
