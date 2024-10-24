@@ -28,7 +28,7 @@ Things like downloading lesson charts, important sites, receiving news and issue
 - Fixing the Session problem.
 - The ability to view version changes by clicking on the version number.
 - Adding notifications section and displaying them.
-- Adding the ability to manage professors, and display splash as a flasher; In root mode (DAHA CLI version v1.1.0).
+- Adding the ability to manage professors, and display splash as a flasher; In root mode (DAHA CLI v1.1.0).
 - Creation of APIs system (v1.0.0) and full documentation page and registration of developers along with web service test rules and... User authentication with password (10 digits) sent by the administrator, ability to manage, confirm and send password by administrator (automation by button).
 - Web services include 3 sections: Users web service, Users Email web service, Ads web service.
 - Added the ability to register ticket responses in a modal way (automation by button).
