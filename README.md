@@ -19,6 +19,12 @@ Things like downloading lesson charts, important sites, receiving news and issue
 
 <br>
 
+## Installation
+You can install project dependencies like this:
+```
+pip install -r requirements.txt
+```
+
 ## Screenshots
 <img src="https://github.com/Mhadi-1382/daha-website-flask/blob/master/static/media/imgs/screenshots/shot-1.jpg" alt="daha-website-flask">
 
