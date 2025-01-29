@@ -10,15 +10,19 @@
 
 <br>
 
-<img src="https://github.com/Mhadi-1382/daha-website-flask/blob/master/static/media/imgs/screenshots/shot-1.jpg" alt="">
+<img src="https://github.com/Mhadi-1382/daha-website-flask/blob/master/static/media/images/icon.svg" alt="daha-website-flask" width="80">
 
 **Daha, quick access to all university facilities.**
 
 With the Daha application, you can easily do things related to your university;
 Things like downloading lesson charts, important sites, receiving news and issues related to the university and students as notifications and emails, receiving textbooks, introducing or promoting business cards, and many other attractive features!
 
-### Version changes
-> **Version (1.8.2)**
+## Screenshots
+<img src="https://github.com/Mhadi-1382/daha-website-flask/blob/master/static/media/imgs/screenshots/shot-1.jpg" alt="daha-website-flask">
+
+
+## Version changes
+> **Version (1.8.2):**
 - The ability to execute defined commands by voice (Daha voice assistant, BETA stage - 12 commands).
 - Added the ability to close the menu by touching the screen with background blur.
 - Added the ability to register and log in to the user account (authentication for logging in with a security key; 4 to 6 digits) for professors and authentication of dashboard information with national code and session.
@@ -40,7 +44,7 @@ Things like downloading lesson charts, important sites, receiving news and issue
 - Added the ability to record additional information in the information editing section as a tab (contact number, national code, date of birth, field of study, education, job, interests).
 - Bug fixes and minor changes.
 
- > **Version (1.0.0)**
+ > **Version (1.0.0):**
 - Registration and login based on access level.
 - (modal) registration conditions or rules.
 - Password recovery.
@@ -77,4 +81,7 @@ Things like downloading lesson charts, important sites, receiving news and issue
 - Using flat and colored icons on the main page.
 - Includes robots.txt and sitemap.xml file.
 - use of; Session to manage user sessions (30 days expiration), Cookie to manage notification display (3 days expiration), LocalStorage to manage dark and light web app modes.
-- The possibility of installing and using the web app on the browser (dahauni.ir), Android (APK), Windows (EXE) and also the feature (PWA) that can be run on all devices. 
+- The possibility of installing and using the web app on the browser (dahauni.ir), Android (APK), Windows (EXE) and also the feature (PWA) that can be run on all devices.
+
+## Licence
+This project is <a href="https://github.com/Mhadi-1382/daha-website-flask/blob/main/LICENSE">MIT<a/> licenced.
