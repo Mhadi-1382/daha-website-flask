@@ -1,5 +1,5 @@
 
-# Daha Website Flask
+# daha-website-flask
 
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/Mhadi-1382/daha-website-flask
 )
@@ -15,11 +15,12 @@
 **Daha, quick access to all university facilities.**
 
 With the Daha application, you can easily do things related to your university;
-Things like downloading lesson charts, important sites, receiving news and issues related to the university and students as notifications and emails, receiving textbooks, introducing or promoting business cards, and many other attractive features!
+Things like downloading lesson charts, important sites, receiving news and issues related to the university and students as notifications and emails, receiving textbooks, introducing or promoting business cards, and many other attractive features.
+
+<br>
 
 ## Screenshots
 <img src="https://github.com/Mhadi-1382/daha-website-flask/blob/master/static/media/imgs/screenshots/shot-1.jpg" alt="daha-website-flask">
-
 
 ## Version changes
 > **Version (1.8.2):**
@@ -84,4 +85,4 @@ Things like downloading lesson charts, important sites, receiving news and issue
 - The possibility of installing and using the web app on the browser (dahauni.ir), Android (APK), Windows (EXE) and also the feature (PWA) that can be run on all devices.
 
 ## Licence
-This project is <a href="https://github.com/Mhadi-1382/daha-website-flask/blob/main/LICENSE">MIT<a/> licenced.
+This project is <a href="https://github.com/Mhadi-1382/daha-website-flask/blob/master/LICENSE">MIT<a/> licenced.
